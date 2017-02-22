@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Daniel Hayes | Polls{% endblock title %}
+{% block content %}
+<h2>{{ question.question_text }}</h2>
+
+<table>
+{% for choice in question.choice_set.all %}
+  <tr>
+    <td>
+      {{ choice.choice_text }}
+    </td>
+    <td>
+      {{ choice.votes }}
+    </td>
+  </tr>
+{% endfor %}
+</table>
+
+{% if question.expiry_date > now %}
+  <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+{% endif %}
+{% endblock content %}

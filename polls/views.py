@@ -9,11 +9,17 @@ from .models import Question
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+    context_object_name = 'question_list'
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return Question.objects.filter(pub_date__lte=timezone.now())[:5]
+        return Question.objects.filter(pub_date__lte=timezone.now())
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['active_questions'] = Question.objects.filter(expiry_date__gt=timezone.now())
+        context['old_questions'] = Question.objects.filter(expiry_date__lte=timezone.now())
+        return context
 
 
 class DetailView(generic.DetailView):
@@ -21,6 +27,10 @@ class DetailView(generic.DetailView):
     template_name = 'polls/detail.html'
 
     def dispatch(self, request, *args, **kwargs):
+        """
+        checks whether the question is active. if it is not active, it
+        returns a redirect to the polls' result page. If it is active it defults to showing the form for voting in the polls' detail page.
+        """
         question = get_object_or_404(Question, pk=self.kwargs['pk'])
         if question.expiry_date < timezone.now():
             return redirect('polls:results', pk=self.kwargs['pk'])

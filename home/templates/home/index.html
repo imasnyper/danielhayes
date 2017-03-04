@@ -2,9 +2,9 @@
 
 {% block content %}
 {% if active_questions %}
-<p>
+<h3>
   Active Polls:
-</p>
+</h3>
 <ul>
   {% for question in active_questions %}
     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
@@ -12,12 +12,12 @@
 </ul>
 {% endif %}
 {% if last_question %}
-  <h2>
-    Last Polls Results:
-  </h2>
   <h3>
-    {{ last_question.question_text }}
+    Last Polls Results:
   </h3>
+  <h4>
+    {{ last_question.question_text }}
+  </h4>
   <table>
   {% for choice in last_question.choice_set.all %}
     <tr>

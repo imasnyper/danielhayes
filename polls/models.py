@@ -18,10 +18,8 @@ class Question(models.Model):
 
     def total_vote_count(self):
         choices = self.choice_set.all()
-        total_votes = 0
-        for c in choices:
-            total_votes += c.votes
-
+        total_votes = sum([c.votes for c in choices])
+        
         return total_votes
 
     was_published_recently.admin_order_field = 'pub_date'

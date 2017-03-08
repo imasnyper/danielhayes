@@ -55,6 +55,7 @@ class ResultsView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ResultsView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
+        context['total_votes'] = Question.objects.filter(pk=self.kwargs['pk'])
         return context
 
 def vote(request, question_id):

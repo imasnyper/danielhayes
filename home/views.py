@@ -10,9 +10,7 @@ def index(request):
     last_question = []
     active_questions = []
     last_question = Question.objects.filter(expiry_date__lte=timezone.now())[0]
-    last_question_total_votes = sum([choice.votes for choice in last_question.choice_set.all()])
     active_questions = Question.objects.filter(expiry_date__gt=timezone.now())
     context = {'last_question': last_question,
-               'active_questions': active_questions,
-               'last_question_total_votes': last_question_total_votes}
+               'active_questions': active_questions,}
     return render(request, 'home/index.html', context)

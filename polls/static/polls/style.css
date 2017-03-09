@@ -8,7 +8,7 @@ a:hover{
 
 body {
   margin: auto;
-  width: 50%;
+  width: 60%;
   padding: 3px;
 }
 
@@ -26,6 +26,14 @@ h1 {
 
 .nav-item {
   padding: 0px 15px 0px 15px;
+}
+
+.total_votes {
+  font-weight: bold;
+}
+
+.empty_row {
+  height: 10px !important;
 }
 
 hr {

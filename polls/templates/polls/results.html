@@ -2,7 +2,7 @@
 
 {% block title %}Daniel Hayes | Polls{% endblock title %}
 {% block content %}
-<h2>{{ question.question_text }}</h2>
+<h3>{{ question.question_text }}</h3>
 
 <table>
 {% for choice in question.choice_set.all %}
@@ -15,9 +15,18 @@
     </td>
   </tr>
 {% endfor %}
-<p>
-  Total votes: {{ question.total_vote_count }}
-</p>
+<tr class="empty_row">
+  <td colspan="2">
+  </td>
+</tr>
+<tr>
+    <td class="total_votes">
+      Total votes:
+    </td>
+    <td class="total_votes">
+      {{ question.total_vote_count }}
+    </td>
+</tr>
 </table>
 
 {% if question.expiry_date > now %}

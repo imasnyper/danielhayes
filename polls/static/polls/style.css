@@ -1,9 +1,23 @@
-a:active{
-  text-decoration: none;
+a.nav-item{
+  background-color: white;
+  color: black;
+  border: 2px solid #800000;
+  border-radius: 10px;
+  padding: 5px 15px;
+  font-size: 16px;
 }
 
-a:hover{
+a.nav-item:active{
   text-decoration: none;
+  background-color: #800000;
+  color: white;
+}
+
+a.nav-item:hover{
+  text-decoration: none;
+  background-color: #800000;
+  border: 2px solid #660000;
+  color: white;
 }
 
 body {
@@ -25,7 +39,9 @@ h1 {
 }
 
 .nav-item {
-  padding: 0px 15px 0px 15px;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #800000;
 }
 
 .total_votes {

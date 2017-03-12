@@ -2,5 +2,18 @@
 
 {% block title %}Daniel Hayes | Blog{% endblock title %}
 {% block content %}
-  {{ post.title }}
+  <h4>{{ post.title }}</h4>
+  <p>
+    {{ post.post }}
+  </p>
+  {% if post.postimage_set %}
+  <ul class=post-images>
+    {% for img in post.postimage_set.all %}
+    <li class=post-images>
+      {{ img.image_title }}
+      <img width="{{ img.image_width }}" height= "{{ img.image_height }}" src="{{ img.image.url }}" />
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 {% endblock content %}

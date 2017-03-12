@@ -1,10 +1,13 @@
 from django.contrib import admin
 
-from .models import Post
+from .models import Post, PostImage
 
-# class AuthorInline(admin.TabularInline):
-#     model = Author
-#     extra = 1
+class ImageInline(admin.TabularInline):
+    model = PostImage
+    extra = 1
+    fieldsets = [
+        ('Post Images',     {'fields': ['image_title', 'image']})
+    ]
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
@@ -13,6 +16,7 @@ class PostAdmin(admin.ModelAdmin):
         (None,               {'fields': ['title', 'slug', 'post', 'author']}),
         ('Date information', {'fields': ['pub_date',]}),
     ]
+    inlines = [ImageInline]
     # what to display in thelist of Post objects
     list_display = (
         'title', 'pub_date',

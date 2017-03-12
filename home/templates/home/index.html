@@ -29,12 +29,18 @@
       </td>
     </tr>
   {% endfor %}
-  <td>
-    Total Votes:
-  </td>
-  <td>
-    {{ last_question.total_vote_count }}
-  </td>
+  <tr class="empty_row">
+    <td colspan="2">
+    </td>
+  </tr>
+  <tr>
+      <td class="total_votes">
+        Total votes:
+      </td>
+      <td class="total_votes">
+        {{ last_question.total_vote_count }}
+      </td>
+  </tr>
   </table>
 {% else %}
   <p>

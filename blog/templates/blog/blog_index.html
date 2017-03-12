@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Daniel Hayes | Blog{% endblock title %}
+{% block content %}
+  <h4>Blog posts:</h4>
+  <ul>
+    {% for post in latest_posts %}
+    <li>
+      <a class=post-link href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

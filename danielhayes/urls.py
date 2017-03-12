@@ -20,6 +20,7 @@ from django.contrib.auth import views
 urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^polls/', include('polls.urls')),
+    url(r'^blog/', include('blog.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'registration/logout.html'}, name='logout')

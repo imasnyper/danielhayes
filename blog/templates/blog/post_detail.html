@@ -1,19 +1,30 @@
 {% extends 'home/base.html' %}
 
-{% block title %}Daniel Hayes | Blog{% endblock title %}
+{% block nav-links %}
+<li>
+  <a href="{% url 'home:home' %}">Home</a>
+</li>
+<li class="active">
+  <a href="{% url 'blog:index' %}">Blog</a>
+</li>
+<li>
+  <a href="{% url 'polls:index' %}">Polls</a>
+</li>
+{% endblock nav-links %}
 {% block content %}
-  <h4>{{ post.title }}</h4>
+  <h3>{{ post.title }}</h3>
+  <p>
+    Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+  </p>
   <p>
     {{ post.post }}
   </p>
   {% if post.postimage_set %}
-  <ul class=post-images>
     {% for img in post.postimage_set.all %}
-    <li class=post-images>
-      {{ img.image_title }}
       <img width="{{ img.image_width }}" height= "{{ img.image_height }}" src="{{ img.image.url }}" />
-    </li>
+      <div class="text-right">
+        {{ img.image_title }}
+      </div>
     {% endfor %}
-  </ul>
   {% endif %}
 {% endblock content %}

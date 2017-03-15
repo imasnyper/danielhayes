@@ -1,14 +1,23 @@
 {% extends 'home/base.html' %}
 
-{% block title %}Daniel Hayes | Blog{% endblock title %}
+{% block nav-links %}
+<li>
+  <a href="{% url 'home:home' %}">Home</a>
+</li>
+<li class="active">
+  <a href="{% url 'blog:index' %}">Blog</a>
+</li>
+<li>
+  <a href="{% url 'polls:index' %}">Polls</a>
+</li>
+{% endblock nav-links %}
 {% block content %}
-  <h4>Blog posts:</h4>
-  <ul>
+  <h3>Blog posts:</h3>
+  <ul class="no-style">
     {% for post in latest_posts %}
     <li>
       <a class=post-link href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
     </li>
     {% endfor %}
   </ul>
-
 {% endblock content %}

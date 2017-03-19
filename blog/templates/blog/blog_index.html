@@ -12,18 +12,25 @@
 </li>
 {% endblock nav-links %}
 {% block content %}
-  {% for post in latest_posts %}
-  <div class="post-card">
-    <a class=post-title href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
-    <p class="post-author">
-      Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-    </p>
-    <p class="post-index-content">
-      {{ post.post|linebreaksbr|truncatewords:50 }}
-      <span>
-        <a class="read-more" href="{% url 'blog:detail' post.slug %}">Read More</a>
-      </span>
+  <div class="jumbotron">
+    <h1>Daniel's Blog</h1>
+    <p>
+      Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
     </p>
   </div>
+  {% for post in latest_posts %}
+  <a class="post" href="{% url 'blog:detail' post.slug %}">
+    <div class="post-card">
+      <h3 class="post-title">
+        {{ post.title }}
+      </h3>
+      <p class="post-author">
+        Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+      </p>
+      <p class="post-index-content">
+        {{ post.post|linebreaksbr|truncatewords:50 }}
+      </p>
+    </div>
+  </a>
   {% endfor %}
 {% endblock content %}

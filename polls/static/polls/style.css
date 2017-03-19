@@ -67,12 +67,26 @@ img{
 .container-fluid.content {
   padding-top: 100px;
   background-color: snow;
+  min-height: 100vh;
+}
+
+a.post {
+  display: block;
+  margin: 0 14%;
+}
+
+a.post:hover {
+  text-decoration: none;
 }
 
 
 ul.no-style {
   list-style: none;
   padding-left: 0px;
+}
+
+.post-title {
+  color: black;
 }
 
 .post-content {
@@ -83,12 +97,22 @@ ul.no-style {
   padding: 20px 0px;
 }
 
+.post-author {
+  color: black;
+}
+
+.post-index-content {
+  color: black;
+}
+
 .post-card {
-  background-color: whitesmoke;
-  margin: 30px 14%;
+  background-color: #eee;
+  margin: 0 0 45px 0;
   padding: 30px 30px;
   border: 1px solid #F9F9F9;
-  box-shadow: 4px 4px 2px grey;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),
+              0 4px 5px 0 rgba(0,0,0,0.06),
+              0 1px 10px 0 rgba(0,0,0,0.08);
 }
 
 .navbar-toggle {
@@ -145,6 +169,9 @@ ul.no-style {
 .navbar-default {
   background-color: #22516d;
   border-color: #042c43;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),
+              0 4px 5px 0 rgba(0,0,0,0.06),
+              0 1px 10px 0 rgba(0,0,0,0.08);
 }
 .navbar-default .navbar-brand {
   color: #bbcfdc;

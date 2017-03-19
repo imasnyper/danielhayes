@@ -12,12 +12,18 @@
 </li>
 {% endblock nav-links %}
 {% block content %}
-  <h3>Blog posts:</h3>
-  <ul class="no-style">
-    {% for post in latest_posts %}
-    <li>
-      <a class=post-link href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+  {% for post in latest_posts %}
+  <div class="post-card">
+    <a class=post-title href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a>
+    <p class="post-author">
+      Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+    </p>
+    <p class="post-index-content">
+      {{ post.post|linebreaksbr|truncatewords:50 }}
+      <span>
+        <a class="read-more" href="{% url 'blog:detail' post.slug %}">Read More</a>
+      </span>
+    </p>
+  </div>
+  {% endfor %}
 {% endblock content %}

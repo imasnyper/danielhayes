@@ -33,4 +33,15 @@
     </div>
   </a>
   {% endfor %}
+  {% block pagination %}
+    <div class="pagination">
+      {% for page in paginator.page_range %}
+        {% if page == page_obj.number %}
+          <span class="pagination-cur-page">{{ page_obj.number }}</span>
+        {% else %}
+          <span class="step-links"><a href="{% url 'blog:index'  %}?page={{ page }}">{{ page }}</a></span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endblock pagination %}
 {% endblock content %}

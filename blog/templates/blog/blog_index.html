@@ -35,6 +35,9 @@
   {% endfor %}
   {% block pagination %}
     <div class="pagination">
+      {% if page_obj.has_previous %}
+        <span class="paginator-prev"><a href="{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}">Previous</a></span>
+      {% endif %}
       {% for page in paginator.page_range %}
         {% if page == page_obj.number %}
           <span class="pagination-cur-page">{{ page_obj.number }}</span>
@@ -42,6 +45,9 @@
           <span class="step-links"><a href="{% url 'blog:index'  %}?page={{ page }}">{{ page }}</a></span>
         {% endif %}
       {% endfor %}
+      {% if page_obj.has_next %}
+        <span class="paginator-next"><a href="{% url 'blog:index' %}?page={{ page_obj.next_page_number }}">Next</a></span>
+      {% endif %}
     </div>
   {% endblock pagination %}
 {% endblock content %}

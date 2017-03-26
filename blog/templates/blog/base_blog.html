@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %}
+
+{% block blog_active %}
+  active
+{% endblock %}
+{% block content %}
+  {% block page_header %}
+  {% endblock page_header %}
+  {% block post_list %}
+    {% for post in posts %}
+      <a class="post" href="{% url 'blog:detail' post.slug %}">
+        <div class="post-card">
+          <h3 class="post-title">
+            {{ post.title }}
+          </h3>
+          <p class="post-author">
+            Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+          </p>
+          <p class="text-align post-index-content">
+            {{ post.post|linebreaksbr|truncatewords:50 }}
+          </p>
+        </div>
+      </a>
+    {% endfor %}
+  {% endblock %}
+  {% block pagination %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <span class="paginator-prev"><a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a></span>
+      {% endif %}
+      {% for page in paginator.page_range %}
+        {% if page == page_obj.number %}
+          <span class="pagination-cur-page">{{ page_obj.number }}</span>
+        {% else %}
+          <span class="step-links"><a href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a></span>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
+      {% endif %}
+    </div>
+  {% endblock pagination %}
+{% endblock %}

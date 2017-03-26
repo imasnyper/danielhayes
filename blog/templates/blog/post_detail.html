@@ -1,16 +1,8 @@
 {% extends 'home/base.html' %}
 
-{% block nav-links %}
-<li>
-  <a href="{% url 'home:home' %}">Home</a>
-</li>
-<li class="active">
-  <a href="{% url 'blog:index' %}">Blog</a>
-</li>
-<li>
-  <a href="{% url 'polls:index' %}">Polls</a>
-</li>
-{% endblock nav-links %}
+{% block blog_active %}
+  active
+{% endblock %}
 {% block content %}
   <div class="center-block text-center post-content">
     <h3>{{ post.title }}</h3>

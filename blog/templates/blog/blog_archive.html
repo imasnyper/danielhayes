@@ -1,0 +1,33 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block page_header %}
+  <div class="jumbotron">
+    {% if month %}
+      <h2>{{ month }}/{{ year }} Archive</h2>
+    {% else %}
+      <h2>{{ year }} Archive</h2>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block pag_next_url %}
+  {% if month %}
+    {% url 'blog:archive' year month %}?page={{ page_obj.next_page_number }}
+  {% else %}
+    {% url 'blog:archive' year %}?page={{ page_obj.next_page_number }}
+  {% endif %}
+{% endblock %}
+{% block pag_prev_url %}
+  {% if month %}
+    {% url 'blog:archive' year month %}?page={{ page_obj.previous_page_number }}
+  {% else %}
+    {% url 'blog:archive' year %}?page={{ page_obj.previous_page_number }}
+  {% endif %}
+{% endblock %}
+{% block pag_step_url %}
+  {% if month %}
+    {% url 'blog:archive' year month %}?page={{ page }}
+  {% else %}
+    {% url 'blog:archive' year %}?page={{ page }}
+  {% endif %}
+{% endblock %}

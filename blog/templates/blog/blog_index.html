@@ -1,53 +1,10 @@
-{% extends 'home/base.html' %}
+{% extends 'blog/base_blog.html' %}
 
-{% block nav-links %}
-<li>
-  <a href="{% url 'home:home' %}">Home</a>
-</li>
-<li class="active">
-  <a href="{% url 'blog:index' %}">Blog</a>
-</li>
-<li>
-  <a href="{% url 'polls:index' %}">Polls</a>
-</li>
-{% endblock nav-links %}
-{% block content %}
+{% block page_header %}
   <div class="jumbotron">
     <h1>Daniel's Blog</h1>
     <p>
       Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
     </p>
   </div>
-  {% for post in latest_posts %}
-  <a class="post" href="{% url 'blog:detail' post.slug %}">
-    <div class="post-card">
-      <h3 class="post-title">
-        {{ post.title }}
-      </h3>
-      <p class="post-author">
-        Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-      </p>
-      <p class="text-align post-index-content">
-        {{ post.post|linebreaksbr|truncatewords:50 }}
-      </p>
-    </div>
-  </a>
-  {% endfor %}
-  {% block pagination %}
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-        <span class="paginator-prev"><a href="{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}">Previous</a></span>
-      {% endif %}
-      {% for page in paginator.page_range %}
-        {% if page == page_obj.number %}
-          <span class="pagination-cur-page">{{ page_obj.number }}</span>
-        {% else %}
-          <span class="step-links"><a href="{% url 'blog:index'  %}?page={{ page }}">{{ page }}</a></span>
-        {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <span class="paginator-next"><a href="{% url 'blog:index' %}?page={{ page_obj.next_page_number }}">Next</a></span>
-      {% endif %}
-    </div>
-  {% endblock pagination %}
-{% endblock content %}
+{% endblock page_header %}

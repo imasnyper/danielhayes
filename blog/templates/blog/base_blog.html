@@ -6,23 +6,34 @@
 {% block content %}
   {% block page_header %}
   {% endblock page_header %}
-  {% block post_list %}
-    {% for post in posts %}
-      <a class="post" href="{% url 'blog:detail' post.slug %}">
-        <div class="post-card">
-          <h3 class="post-title">
-            {{ post.title }}
-          </h3>
-          <p class="post-author">
-            Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-          </p>
-          <p class="text-align post-index-content">
-            {{ post.post|linebreaksbr|truncatewords:50 }}
-          </p>
-        </div>
-      </a>
-    {% endfor %}
-  {% endblock %}
+  <div class="row">
+    <div class="col-md-10">
+      {% block post_list %}
+        {% for post in posts %}
+          <a class="post" href="{% url 'blog:detail' post.slug %}">
+            <div class="post-card">
+              <h3 class="post-title">
+                {{ post.title }}
+              </h3>
+              <p class="post-author">
+                Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+              </p>
+              <p class="text-align post-index-content">
+                {{ post.post|linebreaksbr|truncatewords:50 }}
+              </p>
+            </div>
+          </a>
+        {% endfor %}
+      {% endblock %}
+    </div>
+    <div class="col-md-2">
+      {% block archive %}
+        stuff in this column
+      {% endblock %}
+    </div>
+  </div>
+
+
   {% block pagination %}
     <div class="pagination">
       {% if page_obj.has_previous %}

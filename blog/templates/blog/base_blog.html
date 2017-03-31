@@ -26,9 +26,17 @@
         {% endfor %}
       {% endblock %}
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 text-left">
       {% block archive %}
-        stuff in this column
+        <h4>Post Archive</h4>
+          {% for month in archive %}
+            <div>
+              <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}">
+                {{ month.month|date:"F" }}
+                <span>({{ month.c }})</span>
+              </a>
+            </div>
+          {% endfor %}
       {% endblock %}
     </div>
   </div>

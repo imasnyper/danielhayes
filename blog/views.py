@@ -6,6 +6,9 @@ from dateutil.relativedelta import relativedelta
 import datetime
 import pytz
 
+from django.db.models.functions import TruncMonth
+from django.db.models import Count
+
 # Create your views here.
 from .models import Post
 
@@ -16,6 +19,12 @@ class IndexView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['archive'] = Post.objects.annotate(month=TruncMonth('pub_date')).values('month').annotate(c=Count('id'))
+
+        return context
+
 
 class ArchiveView(ListView):
     template_name = "blog/blog_archive.html"
@@ -24,6 +33,7 @@ class ArchiveView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
+        context['archive'] = Post.objects.annotate(month=TruncMonth('pub_date')).values('month').annotate(c=Count('id'))
         if 'month' in self.kwargs.keys():
             context.update(year=self.kwargs['year'], month=self.kwargs['month'])
         elif 'year' in self.kwargs.keys():

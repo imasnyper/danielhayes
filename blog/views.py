@@ -15,25 +15,34 @@ from .models import Post
 
 class IndexView(ListView):
     template_name = "blog/blog_index.html"
-    queryset = Post.objects.all().order_by('-pub_date')
+    queryset = Post.objects.filter(pub_date__lte=timezone.now())
+    queryset = queryset.order_by('-pub_date')
     context_object_name = 'posts'
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['archive'] = Post.objects.annotate(month=TruncMonth('pub_date')).values('month').annotate(c=Count('id'))
+        context['archive'] = Post.objects.filter(pub_date__lte=timezone.now()).annotate(month=TruncMonth('pub_date')).values('month').annotate(c=Count('id'))
 
         return context
 
 
 class ArchiveView(ListView):
     template_name = "blog/blog_archive.html"
-    context_object_name = 'posts'
+    # queryset = Post.objects.filter(pub_date__lte=timezone.now())
+    # queryset = queryset.order_by('-pub_date')
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
-        context['archive'] = Post.objects.annotate(month=TruncMonth('pub_date')).values('month').annotate(c=Count('id'))
+        print(kwargs)
+        context['posts'] = Post.objects.filter(pub_date__month=self.kwargs['month'])
+        context['posts'] = context['posts'].filter(pub_date__lte=timezone.now())
+        context['posts'] = context['posts'].order_by('-pub_date')
+        
+        context['archive'] = Post.objects.filter(pub_date__lte=timezone.now())
+        context['archive'] = context['archive'].annotate(month=TruncMonth('pub_date'))
+        context['archive'] = context['archive'].values('month').annotate(c=Count('id'))
         if 'month' in self.kwargs.keys():
             context.update(year=self.kwargs['year'], month=self.kwargs['month'])
         elif 'year' in self.kwargs.keys():

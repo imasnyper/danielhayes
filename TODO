@@ -1,7 +1,7 @@
 -Finish Blog
   -switch blog index to ListView from TemplateView --DONE
   -paginate index view --DONE
-  -add archive view(filter posts by month/day/year) to blog index --STARTED
+  -add archive view(filter posts by month/day/year) to blog index --DONE
   -add tags to blog posts(make filters clickable)
   -make blog index the home page
   -add some kind of very light CMS. All I envision neeeding for this site is a basic WYSIWYG editor for new blog posts, to insert photos or code blocks.

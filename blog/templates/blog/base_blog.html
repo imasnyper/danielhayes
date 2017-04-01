@@ -25,6 +25,23 @@
           </a>
         {% endfor %}
       {% endblock %}
+      {% block pagination %}
+        <div class="pagination">
+          {% if page_obj.has_previous %}
+            <span class="paginator-prev"><a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a></span>
+          {% endif %}
+          {% for page in paginator.page_range %}
+            {% if page == page_obj.number %}
+              <span class="pagination-cur-page">{{ page_obj.number }}</span>
+            {% else %}
+              <span class="step-links"><a href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a></span>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
+          {% endif %}
+        </div>
+      {% endblock pagination %}
     </div>
     <div class="col-md-2 text-left">
       {% block archive %}
@@ -42,21 +59,5 @@
   </div>
 
 
-  {% block pagination %}
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-        <span class="paginator-prev"><a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a></span>
-      {% endif %}
-      {% for page in paginator.page_range %}
-        {% if page == page_obj.number %}
-          <span class="pagination-cur-page">{{ page_obj.number }}</span>
-        {% else %}
-          <span class="step-links"><a href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a></span>
-        {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
-      {% endif %}
-    </div>
-  {% endblock pagination %}
+
 {% endblock %}

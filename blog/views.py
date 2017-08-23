@@ -1,13 +1,12 @@
-from django.shortcuts import render
+import datetime
+from dateutil.relativedelta import relativedelta
+
+import pytz
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
+from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.utils import timezone
-from dateutil.relativedelta import relativedelta
-import datetime
-import pytz
-
-from django.db.models.functions import TruncMonth
-from django.db.models import Count
 
 # Create your views here.
 from .models import Post
@@ -22,7 +21,11 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['archive'] = Post.objects.filter(pub_date__lte=timezone.now()).annotate(month=TruncMonth('pub_date')).values('month').annotate(c=Count('id'))
+        context['archive'] = Post.objects.filter(
+            pub_date__lte=timezone.now()).annotate(
+            month=TruncMonth('pub_date')).values(
+            'month').annotate(
+            c=Count('id'))
 
         return context
 
@@ -33,27 +36,47 @@ class ArchiveView(ListView):
     # queryset = queryset.order_by('-pub_date')
     paginate_by = 5
 
+    def num_month_to_word_month(self, month_num):
+        month_name_dict = {1: 'January',
+                           2: 'February',
+                           3: 'March',
+                           4: 'April',
+                           5: 'May',
+                           6: 'June',
+                           7: 'July',
+                           8: 'August',
+                           9: 'September',
+                           10: 'October',
+                           11: 'November',
+                           12: 'December'}
+        month_num = int(month_num)
+        return month_name_dict[month_num]
+
+    def archive(self):
+        a = Post.objects.filter(pub_date__lte=timezone.now())
+        a = a.annotate(month=TruncMonth('pub_date'))
+        a = a.values('month').annotate(c=Count('id'))
+
+        return a
+
+    # adds extra context to the context variable created by ListView. In this case the month_name and year variables.
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
-        print(kwargs)
-        context['posts'] = Post.objects.filter(pub_date__month=self.kwargs['month'])
-        context['posts'] = context['posts'].filter(pub_date__lte=timezone.now())
-        context['posts'] = context['posts'].order_by('-pub_date')
-        
-        context['archive'] = Post.objects.filter(pub_date__lte=timezone.now())
-        context['archive'] = context['archive'].annotate(month=TruncMonth('pub_date'))
-        context['archive'] = context['archive'].values('month').annotate(c=Count('id'))
+
+        context['archive'] = self.archive()
         if 'month' in self.kwargs.keys():
             context.update(year=self.kwargs['year'], month=self.kwargs['month'])
+            context['month_name'] = self.num_month_to_word_month(self.kwargs['month'])
         elif 'year' in self.kwargs.keys():
             context.update(year=self.kwargs['year'])
 
         return context
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         utc = pytz.utc
         year_int = int(self.kwargs['year'])
         year = datetime.datetime(year_int, 1, 1, 0, 0, tzinfo=utc)
+        queryset = []
 
         if 'month' in self.kwargs:
             month = int(self.kwargs['month'])
@@ -63,8 +86,19 @@ class ArchiveView(ListView):
         elif 'year' in self.kwargs:
             next_year = year + relativedelta(years=1)
             queryset = Post.objects.filter(pub_date__range=(year, next_year)).order_by('pub_date')
+
         return queryset
 
 
 class DetailView(DetailView):
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['archive'] = Post.objects.filter(
+            pub_date__lte=timezone.now()).annotate(
+            month=TruncMonth('pub_date')).values(
+            'month').annotate(
+            c=Count('id'))
+
+        return context

@@ -3,12 +3,30 @@
 {% block page_header %}
   <div class="jumbotron">
     {% if month %}
-      <h2>{{ month }}/{{ year }} Archive</h2>
+      <h2>{{ month_name }} {{ year }} Archive</h2>
     {% else %}
       <h2>{{ year }} Archive</h2>
     {% endif %}
   </div>
 {% endblock %}
+
+{% block post_list %}
+{% for post in post_list %}
+<a class="post" href="{% url 'blog:detail' post.slug %}">
+    <div class="post-card">
+        <h3 class="post-title">
+            {{ post.title }}
+        </h3>
+        <p class="post-author">
+            Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+        </p>
+        <p class="text-align post-index-content">
+            {{ post.post|linebreaksbr|truncatewords:50 }}
+        </p>
+    </div>
+</a>
+{% endfor %}
+{% endblock post_list %}
 
 {% block pag_next_url %}
   {% if month %}

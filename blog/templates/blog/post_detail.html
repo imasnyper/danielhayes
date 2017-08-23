@@ -1,24 +1,33 @@
-{% extends 'home/base.html' %}
+{% extends 'blog/base_blog.html' %}
 
-{% block blog_active %}
-  active
-{% endblock %}
-{% block content %}
-  <div class="center-block text-center post-content">
-    <h3>{{ post.title }}</h3>
-    <p>
-      Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-    </p>
+{% block page_header %}
+<div class="jumbotron">
+    <h2>{{ post.title }}</h2>
+    <h4>Written by {{ post.author|title }} on {{post.pub_date|date:"l, F j, Y" }}</h4>
+</div>
+{% endblock page_header %}
+
+{% block post_detail %}
+<!--<div class="center-block text-center post-content">-->
     <p class="post-content-text">
-      {{ post.post|linebreaksbr }}
+        {{ post.post|linebreaksbr }}
     </p>
     {% if post.postimage_set %}
-      {% for img in post.postimage_set.all %}
-        <img width="{{ img.image_width }}" height= "{{ img.image_height }}" src="{{ img.image.url }}" />
-        <div class="text-right">
-          {{ img.image_title }}
+{% for img in post.postimage_set.all %}
+<div class="thumbnail" style="width:{{ img.image.width }}px">
+    <a href="{{ img.image.url }}" target="_blank">
+        <img width="{{ img.image_width }}" height="{{ img.image_height }}" src="{{ img.image.url }}"/>
+        <div class="caption text-right">
+            <p>{{ img.image_title }}</p>
         </div>
-      {% endfor %}
+    </a>
+</div>
+{% endfor %}
     {% endif %}
-  </div>
-{% endblock content %}
+<!--</div>-->
+{% endblock post_detail %}
+
+{% block post_list %}
+{% endblock post_list %}
+{% block pagination %}
+{% endblock pagination %}

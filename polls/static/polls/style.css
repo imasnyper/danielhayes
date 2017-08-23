@@ -44,6 +44,15 @@ h1 {
 
 /* As RGBa codes */
 
+
+.btn{
+  background-color: #527D96;
+  padding: 10px 10px;
+  margin: 5px 0;
+  width: 125px;
+  border-color: #042C43;
+}
+
 img{
   display: block;
   max-width: 100%;
@@ -72,7 +81,7 @@ img{
 
 a.post {
   display: block;
-  margin: 0 14%;
+  margin: 0 10%;
 }
 
 a.post:hover {
@@ -96,6 +105,7 @@ ul.no-style {
 
 .post-content-text {
   padding: 20px 0px;
+  text-align: left;
 }
 
 .post-author {
@@ -162,7 +172,13 @@ ul.no-style {
   padding-left: 40px;
 }
 
+.archive-count{
+  float: right;
+}
 
+.post-archive{
+  padding: 0 7%;
+}
 
 
 

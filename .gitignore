@@ -3,3 +3,4 @@ venv
 danielhayes/settings.py
 **/migrations
 media/
+*.pyc

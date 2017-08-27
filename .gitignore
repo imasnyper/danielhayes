@@ -1,6 +1,8 @@
-venv/**
 venv
 danielhayes/settings.py
 **/migrations
 media/
 *.pyc
+**/__pychache__
+db.sqlite3
+.idea

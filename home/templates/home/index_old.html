@@ -1,0 +1,61 @@
+{% extends 'home/base_old.html' %}
+
+{% block home_active %}
+  active
+{% endblock %}
+{% block content %}
+  {% if active_questions %}
+  <h3>
+    Active Polls:
+  </h3>
+  <ul class="no-style">
+    {% for question in active_questions %}
+      <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if last_question %}
+    <div class="row">
+      <div class="col-sm-4">
+
+      </div>
+      <div class="col-sm-4">
+        <h3>
+          Last Polls Results:
+        </h3>
+        <h4>
+          {{ last_question.question_text }}
+        </h4>
+        <table class="table table-striped text-left">
+          <tbody>
+          {% for choice in last_question.choice_set.all %}
+            <tr>
+              <td>
+                {{ choice.choice_text }}
+              </td>
+              <td>
+                {{ choice.votes }}
+              </td>
+            </tr>
+          {% endfor %}
+          <tr>
+              <td>
+                Total votes:
+              </td>
+              <td>
+                {{ last_question.total_vote_count }}
+              </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-4">
+
+      </div>
+    </div>
+  {% else %}
+    <p>
+      Could not find any polls
+    </p>
+  {% endif %}
+{% endblock %}

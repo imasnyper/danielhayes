@@ -14,7 +14,7 @@
     </p>
     {% if post.postimage_set %}
 {% for img in post.postimage_set.all %}
-<div class="thumbnail" style="width:{{ img.image.width }}px">
+<div class="thumbnail" style="width:auto">
     <a href="{{ img.image.url }}" target="_blank">
         <img width="{{ img.image_width }}" height="{{ img.image_height }}" src="{{ img.image.url }}"/>
         <div class="caption text-right">

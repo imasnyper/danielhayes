@@ -182,6 +182,77 @@ ul.no-style {
 
 
 
+
+.jumbotron {
+	/* background-image: radial-gradient(ellipse farthest-corner at 0px 0px, rgba(162,147,104,0.8) 0%, rgba(106, 96, 65,0) 37%, rgba(69, 57, 20,1) 95%); */
+    /* border-bottom: 2px double rgba(138,122, 74,1); */
+    background-image: url('images/bg.jpg');
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    margin-bottom: 60px;
+    box-shadow: 0 5px 2px darkgrey;
+}
+
+.row {
+	padding: 0 5%;
+}
+
+label {
+    display: block;
+}
+
+.center-hor {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+
+.right-align-hor {
+    text-align: right;
+    margin-bottom: 0 !important;
+    padding-right: 15px;
+}
+
+.footer {
+    padding: 20px 0;
+    margin: 20px 0 0 0;
+	/* background-image: radial-gradient(ellipse farthest-corner at 0px 0px, rgba(162,147,104,0.8) 0%, rgba(106, 96, 65,0) 37%, rgba(69, 57, 20,1) 95%); */
+    background-image: url('images/bg.jpg');
+    background-position-x: 0px;
+    background-position-y: 0%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-top: 1px solid rgba(208,194,152,1);
+    margin-top: 30px;
+}
+
+form {
+    display: inline-block;
+}
+
+.cont {
+    background: blue;
+}
+
+.test {
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+
+
+
+
+
+
+
+
+
 /* Bootstrap navbar styling */
 .navbar-default {
   background-color: #22516d;

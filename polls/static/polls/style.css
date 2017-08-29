@@ -203,6 +203,10 @@ form {
     display: inline-block;
 }
 
+#id_contact_name, #id_contact_email, #id_message {
+    background-color: snow;
+}
+
 .cont {
     background: blue;
 }

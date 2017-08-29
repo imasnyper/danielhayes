@@ -4,8 +4,15 @@ from django.utils import timezone
 
 
 def image_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/<blog-title>/images/<filename>
+    # file will be uploaded to MEDIA_ROOT/images/<filename>
     return 'images/{0}/{1}'.format(instance.image_title, filename)
+    
+    
+class Tag(models.Model):
+    tag = models.CharField(max_length=25)
+    
+    def __str__(self):
+        return self.tag
 
 
 class Post(models.Model):
@@ -17,6 +24,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     post = models.TextField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return self.title

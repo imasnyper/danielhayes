@@ -20,6 +20,21 @@ active
                 <p class="post-author">
                     Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
                 </p>
+                {% if post.tags %}
+                    <p>
+                        {% for tag in post.tags.all %}
+                            {% if forloop.last %}
+                                <span>
+                                    {{ tag }}
+                                </span>
+                            {% else %}
+                                <span>
+                                    {{ tag }}, 
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                {% endif %}
                 <p class="text-align post-index-content">
                     {{ post.post|linebreaksbr|truncatewords:50 }}
                 </p>

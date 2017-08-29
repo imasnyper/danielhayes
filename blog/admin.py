@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, PostImage
+from .models import Post, PostImage, Tag
 
 class ImageInline(admin.TabularInline):
     model = PostImage
@@ -13,7 +13,7 @@ class ImageInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     #used for organizing the admin editing interface
     fieldsets = [
-        (None,               {'fields': ['title', 'slug', 'post', 'author']}),
+        (None,               {'fields': ['title', 'author', 'slug', 'tags', 'post']}),
         ('Date information', {'fields': ['pub_date',]}),
     ]
     inlines = [ImageInline]
@@ -26,3 +26,4 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Tag)

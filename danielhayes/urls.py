@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'registration/logout.html'}, name='logout')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

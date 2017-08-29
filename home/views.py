@@ -38,7 +38,7 @@ def index(request):
                 headers={'Reply-To': contact_email}
             )
             email.send()
-            return redirect('index')
+            return redirect('home:home')
 
     context = {'blurbs': blurbs,
                'form': form_class}

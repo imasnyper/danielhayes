@@ -1,5 +1,9 @@
 {% extends "home/base.html" %}
 
+{% block home_active %}
+active
+{% endblock home_active %}
+
 {% block header %}
 <div class="jumbotron text-center rgba-primary-0-5">
     <h1>Welcome to Hazelspace</h1>
@@ -7,13 +11,10 @@
 </div>
 {% endblock header %}
 {% block content %}
-<!-- <p id="test"></p>
-<button type="button" onclick="myFunction()">Try it</button> -->
-
 {% if blurbs %}
     {% for blurb in blurbs %}
         {% if forloop.first %}<div class="row">{% endif %}
-        <div class="col-xs-12 col-md-4" id="demo">
+        <div class="col-sm-4 blurb">
             <h2>{{ blurb.title }}</h2>
             <p>
                 {{ blurb.text }}
@@ -24,19 +25,19 @@
     {% endfor %}
 {% else %}
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 blurb">
             <h2>Who We Are</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus interdum mi ac dignissim. Donec efficitur vestibulum lobortis. Donec sodales eros ut magna maximus dapibus. Nullam varius consectetur luctus. Curabitur ullamcorper est non elit efficitur, eu luctus ligula molestie. Mauris sodales, augue vel finibus facilisis, leo tortor posuere nisl, sed pharetra massa massa quis augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed laoreet eu ipsum imperdiet congue. Maecenas et velit efficitur, hendrerit mauris vitae, sollicitudin metus. Aliquam sit amet enim id enim dignissim ullamcorper sit amet facilisis lectus. Cras venenatis leo sed tristique pharetra. Aliquam a sem ac dolor lacinia semper.
             </p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 blurb">
             <h2>What We Offer</h2>
             <p>
                 Proin auctor tortor quis elit mattis tincidunt. Sed vulputate erat arcu, a varius felis feugiat eu. Vivamus eget magna ac eros posuere porttitor. Suspendisse rutrum velit dui, sit amet tincidunt libero luctus et. Sed ac diam ligula. Nulla facilisi. Fusce vestibulum, justo et volutpat tempor, risus sapien suscipit nunc, id suscipit ex erat nec urna. Aliquam volutpat, erat vitae tincidunt molestie, nisl eros convallis tellus, at cursus tortor ante at ligula. Sed malesuada justo pellentesque nunc pharetra, a aliquet nisl dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Vestibulum nec sapien eget nibh efficitur tincidunt vitae ac libero. Sed dapibus elit lacinia malesuada accumsan.
             </p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 blurb">
             <h2>Why us?</h2>
             <p>
                 Pellentesque metus mauris, tempus sit amet eros at, vehicula bibendum nunc. Nullam at neque vel mi molestie pretium. Sed mollis ipsum diam, et varius ipsum convallis sed. Morbi pulvinar velit eu turpis vehicula, quis luctus risus fermentum. Vestibulum tempor finibus semper. Cras sit amet odio hendrerit, molestie mauris id, lobortis libero. Sed eu tellus sagittis, suscipit sem sed, varius sapien. Morbi sodales, purus eu maximus volutpat, nibh neque pharetra urna, a porttitor diam leo ut lacus. Cras euismod, nunc vel ullamcorper pulvinar, nunc diam bibendum dolor, sed ultricies tellus neque non odio. Aenean porta arcu eu neque ullamcorper aliquet. In dignissim dui nunc, vitae tincidunt lorem rutrum at. Mauris sed enim leo. Vivamus rutrum venenatis placerat. Etiam pellentesque commodo felis in tempus. Nunc varius ultricies lorem sed vestibulum.

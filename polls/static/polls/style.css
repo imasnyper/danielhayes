@@ -1,37 +1,3 @@
-/*
-
-
-
-body {
-  margin: auto;
-  width: 100%;
-  padding-top: 50px;
-}
-
-.content {
-  margin: auto;
-  width: 60%;
-  padding: 3px;
-}
-
-td {
-  padding-right: 15px;
-}
-
-h1 {
-  text-align: center;
-}
-
-.total_votes {
-  font-weight: bold;
-}
-
-.empty_row {
-  height: 10px !important;
-}
-
-*/
-
 /* As hex codes */
 
 .color-primary-0 { color: #22516D }	/* Main Primary color */
@@ -39,10 +5,6 @@ h1 {
 .color-primary-2 { color: #527D96 }
 .color-primary-3 { color: #042C43 }
 .color-primary-4 { color: #000C12 }
-
-
-
-/* As RGBa codes */
 
 
 .btn{
@@ -74,9 +36,15 @@ img{
 }
 
 .container-fluid.content {
-  padding-top: 100px;
+  padding: 75px 0px 0px;
   background-color: snow;
   min-height: 100vh;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.blurb {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 a.post {
@@ -180,25 +148,22 @@ ul.no-style {
   padding: 0 7%;
 }
 
-
-
-
 .jumbotron {
-	/* background-image: radial-gradient(ellipse farthest-corner at 0px 0px, rgba(162,147,104,0.8) 0%, rgba(106, 96, 65,0) 37%, rgba(69, 57, 20,1) 95%); */
-    /* border-bottom: 2px double rgba(138,122, 74,1); */
-    background-image: url('images/bg.jpg');
+    background-image: url('images/bg.png');
     background-position-x: 0px;
     background-position-y: 0px;
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
+    color: silver;
     margin-bottom: 60px;
     box-shadow: 0 5px 2px darkgrey;
+    border-radius: 0 !important;
 }
 
 .row {
 	padding: 0 5%;
+	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
 }
 
 label {
@@ -218,16 +183,19 @@ label {
 }
 
 .footer {
-    padding: 20px 0;
+    padding: 20px 20px;
     margin: 20px 0 0 0;
 	/* background-image: radial-gradient(ellipse farthest-corner at 0px 0px, rgba(162,147,104,0.8) 0%, rgba(106, 96, 65,0) 37%, rgba(69, 57, 20,1) 95%); */
-    background-image: url('images/bg.jpg');
+/*    background-image: url('images/bg.jpg');
     background-position-x: 0px;
     background-position-y: 0%;
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    border-top: 1px solid rgba(208,194,152,1);
+    border-top: 1px solid rgba(208,194,152,1);*/
+    background-color: #22516d;
+    color: #bbcfdc;
+    text-align: right;
     margin-top: 30px;
 }
 
@@ -254,6 +222,7 @@ form {
 
 
 /* Bootstrap navbar styling */
+/* Via https://work.smarchal.com/twbscolor/ */
 .navbar-default {
   background-color: #22516d;
   border-color: #042c43;

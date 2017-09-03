@@ -5,7 +5,8 @@ from django.utils import timezone
 
 def image_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/images/<filename>
-    return 'images/{0}/{1}'.format(instance.image_title, filename)
+    # return 'images/{0}/{1}'.format(instance.image_title, filename)
+    return 'images/{0}'.format(filename)
     
     
 class Tag(models.Model):

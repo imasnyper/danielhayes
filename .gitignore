@@ -1,8 +1,9 @@
 venv
-danielhayes/settings.py
 **/migrations
 media/
 *.pyc
 **/__pychache__
 db.sqlite3
 .idea
+danielhayes/secret_key.txt
+danielhayes/db_pass.txt

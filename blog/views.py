@@ -19,13 +19,30 @@ class IndexView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
 
+    def archive(self):
+        a = Post.objects.filter(pub_date__lte=timezone.now())  # only retrieve posts that have been published
+
+        # add 'month' to context variable which is all the post datetimes truncated to the month
+        a = a.annotate(month=TruncMonth('pub_date'))
+
+        # add 'c' to context variable which counts the number of posts in a month
+        a = a.values('month').annotate(c=Count('id'))
+
+        # order archive months by the month
+        a = a.order_by('month')
+
+        return a
+
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['archive'] = Post.objects.filter(
-            pub_date__lte=timezone.now()).annotate(
-            month=TruncMonth('pub_date')).values(
-            'month').annotate(
-            c=Count('id'))
+
+        context['archive'] = self.archive()
+        # context['archive'] = Post.objects.filter(
+        #     pub_date__lte=timezone.now()).annotate(
+        #     month=TruncMonth('pub_date')).values(
+        #     'month').annotate(
+        #     c=Count('id'))
+        # context['archive'] = context['archive'].order_by('month')
 
         return context
 
@@ -53,9 +70,16 @@ class ArchiveView(ListView):
         return month_name_dict[month_num]
 
     def archive(self):
-        a = Post.objects.filter(pub_date__lte=timezone.now())
+        a = Post.objects.filter(pub_date__lte=timezone.now())  # only retrieve posts that have been published
+
+        # add 'month' to context variable which is all the post datetimes truncated to the month
         a = a.annotate(month=TruncMonth('pub_date'))
+
+        # add 'c' to context variable which counts the number of posts in a month
         a = a.values('month').annotate(c=Count('id'))
+
+        # order archive months by the month
+        a = a.order_by('month')
 
         return a
 
@@ -93,12 +117,30 @@ class ArchiveView(ListView):
 class DetailView(DetailView):
     model = Post
 
+    def archive(self):
+        # only retrieve posts that have been published
+        a = Post.objects.filter(pub_date__lte=timezone.now())
+
+        # add 'month' to context variable which is all the post datetimes truncated to the month
+        a = a.annotate(month=TruncMonth('pub_date'))
+
+        # add 'c' to context variable which counts the number of posts in a month
+        a = a.values('month').annotate(c=Count('id'))
+
+        # order archive months by the month
+        a = a.order_by('month')
+
+        return a
+
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
-        context['archive'] = Post.objects.filter(
-            pub_date__lte=timezone.now()).annotate(
-            month=TruncMonth('pub_date')).values(
-            'month').annotate(
-            c=Count('id'))
+
+        context['archive'] = self.archive()
+        # context['archive'] = Post.objects.filter(
+        #     pub_date__lte=timezone.now()).annotate(
+        #     month=TruncMonth('pub_date')).values(
+        #     'month').annotate(
+        #     c=Count('id'))
+        # context['archive'] = context['archive'].order_by('month')
 
         return context

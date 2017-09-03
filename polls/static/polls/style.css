@@ -66,14 +66,19 @@ ul.no-style {
   color: black;
 }
 
-.post-content {
+/*.post-content {
   padding: 0px 5px;
   max-width: 600px;
-}
+  min-height: 600px;
+}*/
 
 .post-content-text {
   padding: 20px 0px;
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-word;
+  min-height: 600px; /*stretch page if post is short*/
+  max-width: 600px; /*keep paragraph a readable width*/
+  margin: 0 auto; /*center horizontally*/
 }
 
 .post-author {
@@ -160,6 +165,19 @@ ul.no-style {
     margin-bottom: 60px;
     box-shadow: 0 5px 2px darkgrey;
     border-radius: 0 !important;
+}
+
+@media (max-width: 500px) {
+  .jumbotron {
+    background-image: url('images/bg-2.png');
+    background-size: 200;
+  }
+}
+
+@media (max-width: 750px) {
+  .jumbotron {
+    background-size: 200%
+  }
 }
 
 .row {
@@ -320,3 +338,4 @@ form {
     background-color: #042c43;
   }
 }
+

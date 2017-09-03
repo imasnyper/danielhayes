@@ -7,3 +7,4 @@ db.sqlite3
 .idea
 danielhayes/secret_key.txt
 danielhayes/db_pass.txt
+danielhayes/staticfiles

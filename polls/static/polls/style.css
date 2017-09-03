@@ -205,13 +205,12 @@ label {
     padding: 20px 20px;
     margin: 20px 0 0 0;
 	/* background-image: radial-gradient(ellipse farthest-corner at 0px 0px, rgba(162,147,104,0.8) 0%, rgba(106, 96, 65,0) 37%, rgba(69, 57, 20,1) 95%); */
-/*    background-image: url('images/bg.jpg');
     background-position-x: 0px;
     background-position-y: 0%;
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    border-top: 1px solid rgba(208,194,152,1);*/
+    /*border-top: 1px solid rgba(208,194,152,1);*/
     background-color: #22516d;
     color: #bbcfdc;
     text-align: right;

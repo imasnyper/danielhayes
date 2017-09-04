@@ -44,6 +44,40 @@ def index(request):
                'form': form_class}
     return render(request, 'home/index.html', context)
 
+
+def contact(request):
+    form_class = ContactForm
+
+    if request.method == 'POST':
+        form = form_class(data=request.POST)
+
+        if form.is_valid():
+            contact_name = request.POST.get('contact_name', "")
+            contact_email = request.POST.get('contact_email', "")
+            message = request.POST.get('message', "")
+
+            template = get_template('home/contact_template.txt')
+
+            context = {
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'form_message': message,
+            }
+            content = template.render(context)
+
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "dhayes" + "",
+                ['danihaye@gmail.com'],
+                headers={'Reply-To': contact_email}
+            )
+            email.send()
+            return redirect('home:home')
+
+    context = {'form': form_class}
+    return render(request, 'home/contact.html', context)
+
 # from django.shortcuts import render, get_list_or_404, get_object_or_404
 # from django.utils import timezone
 #

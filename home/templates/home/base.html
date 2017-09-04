@@ -11,54 +11,65 @@
     <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'home/style.css' %}"/>
 
     <link href="https://fonts.googleapis.com/css?family=Coda|Lato:300" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     
-    <script src="{% static 'polls/script.js' %}"></script>
+    <script src="{% static 'home/script.js' %}"></script>
 
     {% block title %}<title>Daniel Hayes</title>{% endblock title %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container-fluid nav-container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'home:home' %}">{% block nav-brand %}DH{% endblock %}</a>
+            <a class="navbar-brand" href="{% url 'home:home' %}">
+                {% block nav-brand %}
+                    DH
+                {% endblock %}
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="MyNavbar">
             <ul class="nav navbar-nav">
-                <li class="{% block home_active %}{% endblock %}">
-                    <a href="{% url 'home:home' %}">Home</a>
-                </li>
+                {% comment %}
+                <!--<li class="{% block home_active %}{% endblock %}">-->
+                    <!--<a href="{% url 'home:home' %}">Home</a>-->
+                <!--</li>-->
+                {% endcomment %}
                 <li class="{% block blog_active %}{% endblock %}">
                     <a href="{% url 'blog:index' %}">Blog</a>
                 </li>
-                <li class="{% block polls_active %}{% endblock %}">
-                    <a href="{% url 'polls:index' %}">Polls</a>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {% if request.user.is_authenticated %}
-                <li class="navbar-text">
-                    Hello {{ request.user.username|title }}.
+                <li class="{% block contact_active %}{% endblock %}">
+                    <a href="{% url 'home:contact' %}">Contact</a>
                 </li>
-                <li class="padding-left-0">
-                    <a href="{% url 'logout' %}">Logout?</a>
-                </li>
-                {% else %}
-                <li>
-                    <a href="{% url 'login' %}">Login</a>
-                </li>
-                {% endif %}
             </ul>
+            {% comment %}
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--{% if request.user.is_authenticated %}-->
+                <!--<li class="navbar-text">-->
+                    <!--Hello {{ request.user.username|title }}.-->
+                <!--</li>-->
+                <!--<li class="padding-left-0">-->
+                    <!--<a href="{% url 'logout' %}">Logout?</a>-->
+                <!--</li>-->
+                <!--{% else %}-->
+                <!--<li>-->
+                    <!--<a href="{% url 'login' %}">Login</a>-->
+                <!--</li>-->
+                <!--{% endif %}-->
+            <!--</ul>-->
+            {% endcomment %}
         </div>
     </div>
 </nav>

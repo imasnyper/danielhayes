@@ -3,12 +3,36 @@
 {% block page_header %}
   <div class="jumbotron">
     {% if month %}
-      <h2>{{ month_name }} {{ year }} Archive</h2>
+      <span>
+          <a class="archive-links" href="{% url 'blog:archive' year month %}">
+              <h2>{{ month_name }}</h2>
+          </a>
+          <a class="archive-links" href="{% url 'blog:archive' year %}">
+              <h2>{{ year }}</h2>
+          </a>
+          <h2 class="archive-links">Archive</h2>
+      </span>
     {% else %}
-      <h2>{{ year }} Archive</h2>
+      <span>
+          <a class="archive-links" href="{% url 'blog:archive' year %}">
+              <h2>{{ year }}</h2>
+          </a>
+          <h2 class="archive-links">Archive</h2>
+      </span>
     {% endif %}
   </div>
 {% endblock %}
+
+{% block breadcrumb %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item"
+           href="{% url 'blog:archive' year %}">{{ year }}</a>
+        {% if month %}
+            <a class="breadcrumb-item"
+                href="{% url 'blog:archive' year month %}">{{ month_name }}</a>
+        {% endif %}
+    </nav>
+{% endblock breadcrumb %}
 
 {% block post_list %}
 {% for post in post_list %}

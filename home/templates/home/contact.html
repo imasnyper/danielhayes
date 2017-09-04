@@ -1,0 +1,22 @@
+{% extends "home/base.html" %}
+
+{% block contact_active %}
+active
+{% endblock contact_active %}
+{% block header %}
+<div class="jumbotron text-center rgba-primary-0-5">
+    <h1>Contact Me</h1>
+    <h3>Use this form to contact me regarding any business inquiries, or
+        to just send me a note!</h3>
+</div>
+{% endblock header %}
+{% block contact %}
+    <div class="center-hor">
+        <h2>Contact</h2>
+        <form role="form" action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock contact %}

@@ -49,7 +49,7 @@ img{
 
 a.post {
   display: block;
-  margin: 0 10%;
+  /*margin: 0 10%;*/
 }
 
 a.post:hover {
@@ -60,6 +60,10 @@ a.post:hover {
 ul.no-style {
   list-style: none;
   padding-left: 0px;
+}
+
+.post-container {
+    padding-left: 0;
 }
 
 .post-title {
@@ -100,6 +104,26 @@ ul.no-style {
   color: black;
 }
 
+.archive-links {
+    display: inline-block !important;
+}
+
+a.archive-links {
+    color: silver;
+}
+
+a:link.archive-links a:visited.archive {
+    text-decoration: none;
+}
+
+a:hover.archive-links {
+    text-decoration: none;
+}
+
+a:active.archive-links {
+    text-decoration: none;
+}
+
 .navbar-toggle {
   line-height: 75px;
   height: 30px;
@@ -120,7 +144,7 @@ ul.no-style {
   margin-right: 7.5%;
 }
 
-.navbar-header {
+.nav-container {
   padding-left: 7.5%;
 }
 
@@ -128,14 +152,11 @@ ul.no-style {
   font-size: 24px;
   padding-left: 0px;
   font-family: 'Coda';
+  margin-left: 0 !important;
 }
 
 .navbar-nav li a {
   font-size: 16px;
-}
-
-.navbar-right li a {
-  padding-right: 7.5%;
 }
 
 .navbar-text{
@@ -165,6 +186,12 @@ ul.no-style {
     margin-bottom: 60px;
     box-shadow: 0 5px 2px darkgrey;
     border-radius: 0 !important;
+    padding-left: 7.5% !important;
+    padding-right: 7.5% !important;
+}
+
+.jumbotron-subheading {
+    padding-left: 0;
 }
 
 @media (max-width: 500px) {
@@ -174,14 +201,16 @@ ul.no-style {
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .jumbotron {
     background-size: 200%
+    padding-left: 7.5%;
+    padding-right: 7.5%;
   }
 }
 
 .row {
-	padding: 0 5%;
+	padding: 0 7.5%;
 	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
 }
 

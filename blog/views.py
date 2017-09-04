@@ -8,7 +8,6 @@ from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-# Create your views here.
 from .models import Post
 
 
@@ -20,12 +19,15 @@ class IndexView(ListView):
     paginate_by = 5
 
     def archive(self):
-        a = Post.objects.filter(pub_date__lte=timezone.now())  # only retrieve posts that have been published
+        # only retrieve posts that have been published
+        a = Post.objects.filter(pub_date__lte=timezone.now())
 
-        # add 'month' to context variable which is all the post datetimes truncated to the month
+        # add 'month' to context variable which is all the post datetimes
+        # truncated to the month
         a = a.annotate(month=TruncMonth('pub_date'))
 
-        # add 'c' to context variable which counts the number of posts in a month
+        # add 'c' to context variable which counts the number of posts in a
+        # month
         a = a.values('month').annotate(c=Count('id'))
 
         # order archive months by the month
@@ -70,12 +72,15 @@ class ArchiveView(ListView):
         return month_name_dict[month_num]
 
     def archive(self):
-        a = Post.objects.filter(pub_date__lte=timezone.now())  # only retrieve posts that have been published
+        # only retrieve posts that have been published
+        a = Post.objects.filter(pub_date__lte=timezone.now())
 
-        # add 'month' to context variable which is all the post datetimes truncated to the month
+        # add 'month' to archive context variable which is all the post
+        # datetimes truncated to the month
         a = a.annotate(month=TruncMonth('pub_date'))
 
-        # add 'c' to context variable which counts the number of posts in a month
+        # add 'c' to archive context variable which counts the number of posts
+        # in a month
         a = a.values('month').annotate(c=Count('id'))
 
         # order archive months by the month
@@ -83,14 +88,17 @@ class ArchiveView(ListView):
 
         return a
 
-    # adds extra context to the context variable created by ListView. In this case the month_name and year variables.
+    # adds extra context to the context variable created by ListView. In this
+    # case the month_name and year variables.
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
 
         context['archive'] = self.archive()
         if 'month' in self.kwargs.keys():
-            context.update(year=self.kwargs['year'], month=self.kwargs['month'])
-            context['month_name'] = self.num_month_to_word_month(self.kwargs['month'])
+            context.update(
+                year=self.kwargs['year'], month=self.kwargs['month'])
+            context['month_name'] = self.num_month_to_word_month(
+                self.kwargs['month'])
         elif 'year' in self.kwargs.keys():
             context.update(year=self.kwargs['year'])
 
@@ -106,10 +114,12 @@ class ArchiveView(ListView):
             month = int(self.kwargs['month'])
             date1 = datetime.datetime(year_int, month, 1, 0, 0, tzinfo=utc)
             date2 = date1 + relativedelta(months=1)
-            queryset = Post.objects.filter(pub_date__range=(date1, date2)).order_by('pub_date')
+            queryset = Post.objects.filter(
+                pub_date__range=(date1, date2)).order_by('pub_date')
         elif 'year' in self.kwargs:
             next_year = year + relativedelta(years=1)
-            queryset = Post.objects.filter(pub_date__range=(year, next_year)).order_by('pub_date')
+            queryset = Post.objects.filter(
+                pub_date__range=(year, next_year)).order_by('pub_date')
 
         return queryset
 
@@ -121,10 +131,12 @@ class DetailView(DetailView):
         # only retrieve posts that have been published
         a = Post.objects.filter(pub_date__lte=timezone.now())
 
-        # add 'month' to context variable which is all the post datetimes truncated to the month
+        # add 'month' to context variable which is all the post datetimes
+        # truncated to the month
         a = a.annotate(month=TruncMonth('pub_date'))
 
-        # add 'c' to context variable which counts the number of posts in a month
+        # add 'c' to context variable which counts the number of posts in a
+        # month
         a = a.values('month').annotate(c=Count('id'))
 
         # order archive months by the month

@@ -7,44 +7,48 @@ active
 {% block page_header %}
 {% endblock page_header %}
 <div class="row">
-    <div class="col-sm-8 text-center">
+    <div class="col-sm-8 text-center post-container">
         {% block post_detail %}
         {% endblock post_detail %}
         {% block post_list %}
-        {% for post in posts %}
-        <a class="post" href="{% url 'blog:detail' post.slug %}">
-            <div class="post-card">
-                <h3 class="post-title">
-                    {{ post.title }}
-                </h3>
-<!--                <h5 class="post-author">
-                    Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-                </h5>-->
-                <h5 class="post-author">
-                    Published on {{ post.pub_date|date:"l, F j, Y" }}
-                </h5>
-                {% if post.tags.all %}
-                    <h6>
-                        Tags: 
-                        {% for tag in post.tags.all %}
-                            {% if forloop.last %}
-                                <span>
-                                    {{ tag }}
-                                </span>
-                            {% else %}
-                                <span>
-                                    {{ tag }}, 
-                                </span>
-                            {% endif %}
-                        {% endfor %}
-                    </h6>
-                {% endif %}
-                <p class="text-align post-index-content">
-                    {{ post.post|linebreaksbr|truncatewords:50 }}
-                </p>
-            </div>
-        </a>
-        {% endfor %}
+        {% if posts %}
+            {% for post in posts %}
+            <a class="post" href="{% url 'blog:detail' post.slug %}">
+                <div class="post-card">
+                    <h3 class="post-title">
+                        {{ post.title }}
+                    </h3>
+    <!--                <h5 class="post-author">
+                        Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+                    </h5>-->
+                    <h5 class="post-author">
+                        Published on {{ post.pub_date|date:"l, F j, Y" }}
+                    </h5>
+                    {% if post.tags.all %}
+                        <h6>
+                            Tags:
+                            {% for tag in post.tags.all %}
+                                {% if forloop.last %}
+                                    <span>
+                                        {{ tag }}
+                                    </span>
+                                {% else %}
+                                    <span>
+                                        {{ tag }},
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+                        </h6>
+                    {% endif %}
+                    <p class="text-align post-index-content">
+                        {{ post.post|linebreaksbr|truncatewords:50 }}
+                    </p>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <h1>No posts are available.</h1>
+        {% endif %}
         {% endblock %}
         {% block pagination %}
         <div class="pagination">

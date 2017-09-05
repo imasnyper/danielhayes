@@ -11,6 +11,29 @@ from django.views.generic.list import ListView
 from .models import Post
 
 
+def archive():
+    """
+    makes an annotated list if the months where posts exist,
+    and the post count for each month
+    :return: post-count-annotated list of months with posts
+    """
+    # only retrieve posts that have been published
+    a = Post.objects.filter(pub_date__lte=timezone.now())
+
+    # add 'month' to context variable which is all the post
+    # datetimes truncated to the month
+    a = a.annotate(month=TruncMonth('pub_date'))
+
+    # add 'c' to context variable which counts the number of
+    # posts in a month
+    a = a.values('month').annotate(c=Count('id'))
+
+    # order archive months by the month
+    a = a.order_by('month')
+
+    return a
+
+
 class IndexView(ListView):
     template_name = "blog/blog_index.html"
     queryset = Post.objects.filter(pub_date__lte=timezone.now())
@@ -18,27 +41,10 @@ class IndexView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
 
-    def archive(self):
-        # only retrieve posts that have been published
-        a = Post.objects.filter(pub_date__lte=timezone.now())
-
-        # add 'month' to context variable which is all the post datetimes
-        # truncated to the month
-        a = a.annotate(month=TruncMonth('pub_date'))
-
-        # add 'c' to context variable which counts the number of posts in a
-        # month
-        a = a.values('month').annotate(c=Count('id'))
-
-        # order archive months by the month
-        a = a.order_by('month')
-
-        return a
-
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
-        context['archive'] = self.archive()
+        context['archive'] = archive()
         # context['archive'] = Post.objects.filter(
         #     pub_date__lte=timezone.now()).annotate(
         #     month=TruncMonth('pub_date')).values(
@@ -71,29 +77,12 @@ class ArchiveView(ListView):
         month_num = int(month_num)
         return month_name_dict[month_num]
 
-    def archive(self):
-        # only retrieve posts that have been published
-        a = Post.objects.filter(pub_date__lte=timezone.now())
-
-        # add 'month' to archive context variable which is all the post
-        # datetimes truncated to the month
-        a = a.annotate(month=TruncMonth('pub_date'))
-
-        # add 'c' to archive context variable which counts the number of posts
-        # in a month
-        a = a.values('month').annotate(c=Count('id'))
-
-        # order archive months by the month
-        a = a.order_by('month')
-
-        return a
-
     # adds extra context to the context variable created by ListView. In this
     # case the month_name and year variables.
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
 
-        context['archive'] = self.archive()
+        context['archive'] = archive()
         if 'month' in self.kwargs.keys():
             context.update(
                 year=self.kwargs['year'], month=self.kwargs['month'])
@@ -104,6 +93,10 @@ class ArchiveView(ListView):
 
         return context
 
+    # limit queryset to what is in the url.
+    # i.e. if only the year is in the url, retrieve all posts
+    # from that year. if a month is specified as well, only posts
+    # from that month will be added.
     def get_queryset(self, **kwargs):
         utc = pytz.utc
         year_int = int(self.kwargs['year'])
@@ -124,35 +117,37 @@ class ArchiveView(ListView):
         return queryset
 
 
-class DetailView(DetailView):
+class PostDetailView(DetailView):
     model = Post
 
-    def archive(self):
-        # only retrieve posts that have been published
-        a = Post.objects.filter(pub_date__lte=timezone.now())
+    def find_adjacent_posts(self, post):
+        """
+        Given a post object return the most recent(if exists)
+        and the next published(if exists) post.
+        :param post: a post object
+        :return: previous post, and next post if either exists.
+        """
+        all_posts = Post.objects.filter(
+            pub_date__lte=timezone.now()).order_by('pub_date')
+        prev, next = None, None
 
-        # add 'month' to context variable which is all the post datetimes
-        # truncated to the month
-        a = a.annotate(month=TruncMonth('pub_date'))
+        for p in all_posts:
+            if p.pub_date < post.pub_date:
+                prev = p
+            if p.pub_date > post.pub_date:
+                next = p
+                break
 
-        # add 'c' to context variable which counts the number of posts in a
-        # month
-        a = a.values('month').annotate(c=Count('id'))
-
-        # order archive months by the month
-        a = a.order_by('month')
-
-        return a
+        return prev, next
 
     def get_context_data(self, **kwargs):
-        context = super(DetailView, self).get_context_data(**kwargs)
+        context = super(
+            DetailView, self).get_context_data(**kwargs)
 
-        context['archive'] = self.archive()
-        # context['archive'] = Post.objects.filter(
-        #     pub_date__lte=timezone.now()).annotate(
-        #     month=TruncMonth('pub_date')).values(
-        #     'month').annotate(
-        #     c=Count('id'))
-        # context['archive'] = context['archive'].order_by('month')
+        context['prev'], \
+            context['next'] = self.find_adjacent_posts(
+                context['post'])
+
+        context['archive'] = archive()
 
         return context

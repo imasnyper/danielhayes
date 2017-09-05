@@ -1,4 +1,12 @@
 {% extends 'home/base.html' %}
+{% load static %}
+
+{% block extra_stylesheets %}
+    <link rel="stylesheet" type="text/css"
+      href="{% static 'blog/blog_style.css' %}"/>
+{% endblock extra_stylesheets %}
+
+{% block title %}Daniel Hayes | Blog{% endblock title %}
 
 {% block blog_active %}
 active
@@ -69,10 +77,10 @@ active
         </div>
         {% endblock pagination %}
     </div>
-    <div class="col-sm-4 text-left post-archive">
+    <div class="col-sm-4 text-right post-archive">
         {% block archive %}
-        <h4>Post Archive</h4>
-        <div class=".btn-group-vertical btn-group-sm">
+        <h4 class="archive-title">Post Archive</h4>
+        <div class="btn-group-vertical btn-group-sm">
             {% for month in archive %}
             <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}" class="btn btn-primary">
                 <div class="text-left">

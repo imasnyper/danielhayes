@@ -1,0 +1,125 @@
+/*Blog Styling*/
+
+.btn{
+  background-color: #527D96;
+  padding: 10px 10px;
+  width: 150px;
+  border-color: #042C43;
+}
+
+.btn-group-sm {
+    padding: 0 auto;
+}
+
+img{
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+a.post {
+  display: block;
+  /*margin: 0 10%;*/
+}
+
+a.post:hover {
+  text-decoration: none;
+}
+
+
+ul.no-style {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.post-container {
+    padding-left: 0;
+}
+
+.post-title {
+  color: black;
+}
+
+.post-content {
+  min-height: 600px; /*stretch page if post is short*/
+  max-width: 600px; /*keep paragraph a readable width*/
+  margin: 0 auto; /*center horizontally*/
+}
+
+.post-content-text {
+  text-align: justify;
+  text-justify: inter-word;
+  padding-bottom: 20px;
+}
+
+.post-author {
+  color: black;
+}
+
+.post-index-content {
+  color: black;
+}
+
+.post-card {
+  background-color: #eee;
+  margin: 0 0 45px 0;
+  padding: 30px 30px;
+  border: 1px solid #F9F9F9;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),
+              0 4px 5px 0 rgba(0,0,0,0.06),
+              0 1px 10px 0 rgba(0,0,0,0.08);
+  color: black;
+}
+
+.archive-title {
+    margin-top: 0;
+}
+
+.jumbotron-archive-text {
+    display: inline-block !important;
+    color silver;
+}
+
+.jumbotron-archive-links {
+    display: inline-block !important;
+    border-bottom: 1px dashed silver;
+}
+
+a.jumbotron-archive-links {
+    color: silver;
+}
+
+a:link.jumbotron-archive-links a:visited.jumbotron-archive-links {
+    text-decoration: none;
+}
+
+a:hover.jumbotron-archive-links {
+    text-decoration: none;
+    border-bottom: 2px dashed silver;
+}
+
+a:active.jumbotron-archive-links {
+    text-decoration: none;
+}
+
+.archive-count{
+  float: right;
+}
+
+.prev-post {
+    float: right;
+}
+
+.next-post {
+    float: left;
+}
+
+.thumbnail {
+    width: auto;
+}
+
+/*
+.post-archive{
+  padding: 0 7%;
+}*/

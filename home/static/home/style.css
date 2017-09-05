@@ -1,4 +1,19 @@
-/* As hex codes */
+/* Contact Styling */
+
+form {
+    display: inline-block;
+}
+
+#id_contact_name, #id_contact_email, #id_message {
+    background-color: snow;
+}
+
+.cont {
+    background: blue;
+}
+
+
+/* Home Styling */
 
 .color-primary-0 { color: #22516D }	/* Main Primary color */
 .color-primary-1 { color: #BBCFDC } /* light to dark */
@@ -6,33 +21,38 @@
 .color-primary-3 { color: #042C43 }
 .color-primary-4 { color: #000C12 }
 
-
-.btn{
-  background-color: #527D96;
-  padding: 10px 10px;
-  margin: 5px 0;
-  width: 150px;
-  border-color: #042C43;
+.jumbotron {
+    background-image: url('images/bg.png');
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: silver;
+    margin-bottom: 60px;
+    box-shadow: 0 5px 2px darkgrey;
+    border-radius: 0 !important;
+    padding-left: 7.5% !important;
+    padding-right: 7.5% !important;
 }
 
-img{
-  display: block;
-  max-width: 100%;
-  width: auto;
-  height: auto;
+.jumbotron-subheading {
+    padding-left: 0;
 }
 
-.vote_again {
-  padding-top: 15px;
+@media (max-width: 500px) {
+  .jumbotron {
+    background-image: url('images/bg-2.png');
+    background-size: 200;
+  }
 }
 
-.form-horizontal .control-label {
-  text-align: left;
-}
-
-.table {
-  margin: auto;
-  border: 2px solid gray;
+@media (max-width: 768px) {
+  .jumbotron {
+    background-size: 200%
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+  }
 }
 
 .container-fluid.content {
@@ -47,82 +67,41 @@ img{
     text-justify: inter-word;
 }
 
-a.post {
-  display: block;
-  /*margin: 0 10%;*/
+.row {
+	padding: 0 7.5%;
+	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
 }
 
-a.post:hover {
-  text-decoration: none;
+label {
+    display: block;
 }
 
-
-ul.no-style {
-  list-style: none;
-  padding-left: 0px;
+.center-hor {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
 }
 
-.post-container {
-    padding-left: 0;
+.right-align-hor {
+    text-align: right;
+    margin-bottom: 0 !important;
+    padding-right: 15px;
 }
 
-.post-title {
-  color: black;
+.footer {
+    padding: 20px 20px;
+    margin: 20px 0 0 0;
+    background-position-x: 0px;
+    background-position-y: 0%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #22516d;
+    color: #bbcfdc;
+    text-align: right;
+    margin-top: 30px;
 }
 
-/*.post-content {
-  padding: 0px 5px;
-  max-width: 600px;
-  min-height: 600px;
-}*/
-
-.post-content-text {
-  padding: 20px 0px;
-  text-align: justify;
-  text-justify: inter-word;
-  min-height: 600px; /*stretch page if post is short*/
-  max-width: 600px; /*keep paragraph a readable width*/
-  margin: 0 auto; /*center horizontally*/
-}
-
-.post-author {
-  color: black;
-}
-
-.post-index-content {
-  color: black;
-}
-
-.post-card {
-  background-color: #eee;
-  margin: 0 0 45px 0;
-  padding: 30px 30px;
-  border: 1px solid #F9F9F9;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),
-              0 4px 5px 0 rgba(0,0,0,0.06),
-              0 1px 10px 0 rgba(0,0,0,0.08);
-  color: black;
-}
-
-.archive-links {
-    display: inline-block !important;
-}
-
-a.archive-links {
-    color: silver;
-}
-
-a:link.archive-links a:visited.archive {
-    text-decoration: none;
-}
-
-a:hover.archive-links {
-    text-decoration: none;
-}
-
-a:active.archive-links {
-    text-decoration: none;
-}
 
 .navbar-toggle {
   line-height: 75px;
@@ -166,109 +145,6 @@ a:active.archive-links {
   font-size: 16px;
   padding-left: 40px;
 }
-
-.archive-count{
-  float: right;
-}
-
-.post-archive{
-  padding: 0 7%;
-}
-
-.jumbotron {
-    background-image: url('images/bg.png');
-    background-position-x: 0px;
-    background-position-y: 0px;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: silver;
-    margin-bottom: 60px;
-    box-shadow: 0 5px 2px darkgrey;
-    border-radius: 0 !important;
-    padding-left: 7.5% !important;
-    padding-right: 7.5% !important;
-}
-
-.jumbotron-subheading {
-    padding-left: 0;
-}
-
-@media (max-width: 500px) {
-  .jumbotron {
-    background-image: url('images/bg-2.png');
-    background-size: 200;
-  }
-}
-
-@media (max-width: 768px) {
-  .jumbotron {
-    background-size: 200%
-    padding-left: 7.5%;
-    padding-right: 7.5%;
-  }
-}
-
-.row {
-	padding: 0 7.5%;
-	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
-}
-
-label {
-    display: block;
-}
-
-.center-hor {
-    margin: 0 auto;
-    width: 50%;
-    text-align: center;
-}
-
-.right-align-hor {
-    text-align: right;
-    margin-bottom: 0 !important;
-    padding-right: 15px;
-}
-
-.footer {
-    padding: 20px 20px;
-    margin: 20px 0 0 0;
-	/* background-image: radial-gradient(ellipse farthest-corner at 0px 0px, rgba(162,147,104,0.8) 0%, rgba(106, 96, 65,0) 37%, rgba(69, 57, 20,1) 95%); */
-    background-position-x: 0px;
-    background-position-y: 0%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /*border-top: 1px solid rgba(208,194,152,1);*/
-    background-color: #22516d;
-    color: #bbcfdc;
-    text-align: right;
-    margin-top: 30px;
-}
-
-form {
-    display: inline-block;
-}
-
-#id_contact_name, #id_contact_email, #id_message {
-    background-color: snow;
-}
-
-.cont {
-    background: blue;
-}
-
-.test {
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-}
-
-
-
-
-
-
-
 
 
 
@@ -367,3 +243,16 @@ form {
   }
 }
 
+/* Poll Styling */
+.vote_again {
+  padding-top: 15px;
+}
+
+.form-horizontal .control-label {
+  text-align: left;
+}
+
+.table {
+  margin: auto;
+  border: 2px solid gray;
+}

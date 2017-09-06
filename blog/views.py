@@ -152,7 +152,8 @@ class PostDetailView(DetailView):
         context['archive'] = archive()
 
         return context
-        
+
+
 class BlogTagView(ListView):
     model = Tag    
     template_name = "blog/blog_tags.html"
@@ -162,8 +163,8 @@ class BlogTagView(ListView):
         context = super(BlogTagView, self).get_context_data(**kwargs)
         if 'tag' in self.kwargs.keys():
             context.update(tag=self.kwargs['tag'])
-            tag = Tag.objects.get(tag=context['tag'])
-            context['related'] = tag.post_set.all()
+            t = Tag.objects.get(tag=context['tag'])
+            context['related'] = t.post_set.all()
             
         return context
         
@@ -177,7 +178,7 @@ class BlogTagView(ListView):
             # print(self.kwargs)
             # queryset = Tag.objects.all()
             # print(queryset)
-            
+
         # return queryset
             
             

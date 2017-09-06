@@ -7,13 +7,13 @@
     <h2>Tag Cloud</h2>
 </div>
 {% endblock page_header %}
-
 {% block post_detail %}
+
 <div class="tag-cloud">
     {% if tags %}
-        {% for tag in tags %}
+        {% for t in tags %}
             <div class="tag">
-                <a href="{% url 'blog:tags' tag.tag %}">{{ tag.tag }}</a>
+                <a href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
             </div>
         {% endfor %}
     {% else %}
@@ -24,11 +24,8 @@
         {% for p in related %}
             <a href="{% url 'blog:detail' p.slug %}">{{ p.title }}</a>
         {% endfor %}
-    {% else %}
-        View: {{ view }}
     {% endif %}
 </div>
-
 
 {% endblock post_detail %}
 

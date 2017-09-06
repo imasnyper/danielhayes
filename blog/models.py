@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from django.core.validators import RegexValidator
 
 
 def image_directory_path(instance, filename):
@@ -10,22 +11,37 @@ def image_directory_path(instance, filename):
     
     
 class Tag(models.Model):
-    tag = models.CharField(max_length=25)
+    alphanumeric = RegexValidator(
+        r'[0-9a-zA-Z]*$', 'Only alphanumeric characters will be allowed')
+    tag = models.CharField(max_length=25, validators=[alphanumeric])
+
+    def save(self, *args, **kwargs):
+        Tag.full_clean(self)
+        super(Tag, self).save(self, *args, **kwargs)
     
     def __str__(self):
         return self.tag
 
 
 class Post(models.Model):
+    slug_validator = RegexValidator(
+        r'[0-9a-zA-Z\-\_]*$',
+        'Only alphanumeric character and "-" and "_" will be allowed'
+    )
+
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         )
     title = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, validators=[slug_validator])
     post = models.TextField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
     tags = models.ManyToManyField(Tag)
+
+    def save(self, *args, **kwargs):
+        Post.full_clean(self)
+        super(Post, self).save(self, *args, **kwargs)
 
     def __str__(self):
         return self.title

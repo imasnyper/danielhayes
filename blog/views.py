@@ -165,6 +165,8 @@ class BlogTagView(ListView):
             context.update(tag=self.kwargs['tag'])
             t = Tag.objects.get(tag=context['tag'])
             context['related'] = t.post_set.all()
+
+        context['archive'] = archive()
             
         return context
         

@@ -5,12 +5,23 @@
 {% block page_header %}
 <div class="jumbotron">
     <h2>Tag Cloud</h2>
+    <h3>Tag: {{ tag }}</h3>
 </div>
 {% endblock page_header %}
 {% block post_detail %}
 
 <div class="tag-cloud">
+    {% if tag %}
+        <h3>Posts tagged {{ tag }}</h3>
+        {% for p in related %}
+            <div>
+                <a href="{% url 'blog:detail' p.slug %}">
+                    {{ p.title }}</a>
+            </div>
+        {% endfor %}
+    {% endif %}
     {% if tags %}
+        <h3>Tag Cloud</h3>
         {% for t in tags %}
             <div class="tag">
                 <a href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
@@ -18,12 +29,6 @@
         {% endfor %}
     {% else %}
         No tags :(
-    {% endif %}
-    {% if tag %}
-        {{ tag }}
-        {% for p in related %}
-            <a href="{% url 'blog:detail' p.slug %}">{{ p.title }}</a>
-        {% endfor %}
     {% endif %}
 </div>
 

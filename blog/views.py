@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Post
+from .models import Post, Tag
 
 
 def archive():
@@ -56,6 +56,7 @@ class IndexView(ListView):
 
 
 class ArchiveView(ListView):
+    # model = Post
     template_name = "blog/blog_archive.html"
     # queryset = Post.objects.filter(pub_date__lte=timezone.now())
     # queryset = queryset.order_by('-pub_date')
@@ -81,7 +82,8 @@ class ArchiveView(ListView):
     # case the month_name and year variables.
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
-
+    
+        print("get_context kwargs {}".format(self.kwargs))
         context['archive'] = archive()
         if 'month' in self.kwargs.keys():
             context.update(
@@ -98,6 +100,7 @@ class ArchiveView(ListView):
     # from that year. if a month is specified as well, only posts
     # from that month will be added.
     def get_queryset(self, **kwargs):
+        print(kwargs)
         utc = pytz.utc
         year_int = int(self.kwargs['year'])
         year = datetime.datetime(year_int, 1, 1, 0, 0, tzinfo=utc)
@@ -142,7 +145,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(
-            DetailView, self).get_context_data(**kwargs)
+            PostDetailView, self).get_context_data(**kwargs)
 
         context['prev'], \
             context['next'] = self.find_adjacent_posts(
@@ -151,3 +154,32 @@ class PostDetailView(DetailView):
         context['archive'] = archive()
 
         return context
+        
+class BlogTagView(ListView):
+    model = Tag    
+    template_name = "blog/blog_tags.html"
+    context_object_name = 'tags'
+    
+    def get_context_data(self, **kwargs):
+        context = super(BlogTagView, self).get_context_data(**kwargs)
+        if 'tag' in self.kwargs.keys():
+            context.update(tag=self.kwargs['tag'])
+            context['tag_type'] = type(context['tag'])
+            
+        return context
+        
+    # def get_queryset(self, **kwargs):
+        # queryset = []
+        # if 'tag' in self.kwargs:
+            # print(self.kwargs['tag'])
+            # queryset = Post.objects.get(tags__exact=self.kwargs['tag'])
+        # else:
+            # print("no tag in kwargs")
+            # print(self.kwargs)
+            # queryset = Tag.objects.all()
+            # print(queryset)
+            
+        # return queryset
+            
+            
+        

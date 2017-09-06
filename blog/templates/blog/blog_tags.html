@@ -1,0 +1,38 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}Blog | Tags{% endblock title %}
+
+{% block page_header %}
+<div class="jumbotron">
+    <h2>Tag Cloud</h2>
+</div>
+{% endblock page_header %}
+
+{% block post_detail %}
+<div class="tag-cloud">
+    {% if tags %}
+        {% for tag in tags %}
+            <div class="tag">
+                <a href="{% url 'blog:tags' tag.tag %}">{{ tag.tag }}</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        No tags :(
+    {% endif %}
+    {% if tag %}
+        {{ tag }}
+        {{ tag_type }}
+        {% for p in tag.post_set.all %}
+            <a href="{% url 'blog:detail' p.slug %}">{{ p.title }}</a>
+        {% endfor %}
+    {% else %}
+        View: {{ view }}
+    {% endif %}
+</div>
+
+
+{% endblock post_detail %}
+
+
+{% block post_list %}
+{% endblock post_list %}

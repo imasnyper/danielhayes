@@ -21,8 +21,7 @@
     {% endif %}
     {% if tag %}
         {{ tag }}
-        {{ tag_type }}
-        {% for p in tag.post_set.all %}
+        {% for p in related %}
             <a href="{% url 'blog:detail' p.slug %}">{{ p.title }}</a>
         {% endfor %}
     {% else %}

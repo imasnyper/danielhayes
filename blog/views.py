@@ -83,7 +83,6 @@ class ArchiveView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
     
-        print("get_context kwargs {}".format(self.kwargs))
         context['archive'] = archive()
         if 'month' in self.kwargs.keys():
             context.update(
@@ -100,7 +99,6 @@ class ArchiveView(ListView):
     # from that year. if a month is specified as well, only posts
     # from that month will be added.
     def get_queryset(self, **kwargs):
-        print(kwargs)
         utc = pytz.utc
         year_int = int(self.kwargs['year'])
         year = datetime.datetime(year_int, 1, 1, 0, 0, tzinfo=utc)
@@ -164,7 +162,8 @@ class BlogTagView(ListView):
         context = super(BlogTagView, self).get_context_data(**kwargs)
         if 'tag' in self.kwargs.keys():
             context.update(tag=self.kwargs['tag'])
-            context['tag_type'] = type(context['tag'])
+            tag = Tag.objects.get(tag=context['tag'])
+            context['related'] = tag.post_set.all()
             
         return context
         

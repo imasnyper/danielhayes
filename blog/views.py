@@ -159,12 +159,15 @@ class BlogTagView(ListView):
     template_name = "blog/blog_tags.html"
     context_object_name = 'tags'
     
+    def pag_related(self, related):
+        return [related[x:x+5] for x in range(0, len(related), 5)]
+    
     def get_context_data(self, **kwargs):
         context = super(BlogTagView, self).get_context_data(**kwargs)
         if 'tag' in self.kwargs.keys():
             context.update(tag=self.kwargs['tag'])
             t = Tag.objects.get(tag=context['tag'])
-            context['related'] = t.post_set.all()
+            context['related'] = pag_related(t.post_set.all())
 
         context['archive'] = archive()
             

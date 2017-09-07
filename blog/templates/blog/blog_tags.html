@@ -5,7 +5,9 @@
 {% block page_header %}
 <div class="jumbotron">
     <h2>Tag Cloud</h2>
-    <h3>Tag: {{ tag }}</h3>
+    {% if tag %}
+        <h3>Tag: {{ tag }}</h3>
+    {% endif %}
 </div>
 {% endblock page_header %}
 {% block post_detail %}

@@ -3,7 +3,6 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import RegexValidator
 
-
 def image_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/images/<filename>
     # return 'images/{0}/{1}'.format(instance.image_title, filename)
@@ -14,6 +13,9 @@ class Tag(models.Model):
     alphanumeric = RegexValidator(
         r'[0-9a-zA-Z]*$', 'Only alphanumeric characters will be allowed')
     tag = models.CharField(max_length=25, validators=[alphanumeric])
+    
+    def related_post_count(self):
+        return len(self.post_set.filter(pub_date__lte=timezone.now()))
 
     def save(self, *args, **kwargs):
         Tag.full_clean(self)

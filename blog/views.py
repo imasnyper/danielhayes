@@ -36,8 +36,6 @@ def archive():
 
 class IndexView(ListView):
     template_name = "blog/blog_index.html"
-    queryset = Post.objects.filter(pub_date__lte=timezone.now())
-    queryset = queryset.order_by('-pub_date')
     context_object_name = 'posts'
     paginate_by = 5
 
@@ -45,14 +43,24 @@ class IndexView(ListView):
         context = super(IndexView, self).get_context_data(**kwargs)
 
         context['archive'] = archive()
-        # context['archive'] = Post.objects.filter(
-        #     pub_date__lte=timezone.now()).annotate(
-        #     month=TruncMonth('pub_date')).values(
-        #     'month').annotate(
-        #     c=Count('id'))
-        # context['archive'] = context['archive'].order_by('month')
-
+        if 'tag' in self.kwargs.keys():
+            context['tag'] = Tag.objects.get(tag=self.kwargs['tag'])
+            
         return context
+        
+        
+    def get_queryset(self, **kwargs):
+        queryset = []
+        
+        if 'tag' in self.kwargs.keys():
+            tag_object = Tag.objects.get(tag=self.kwargs['tag'])
+            queryset = tag_object.post_set.all().filter(pub_date__lte=timezone.now())
+            queryset = queryset.order_by('pub_date')
+        else:
+            queryset = Post.objects.filter(pub_date__lte=timezone.now())
+            queryset = queryset.order_by('-pub_date')
+            
+        return queryset
 
 
 class ArchiveView(ListView):
@@ -154,37 +162,37 @@ class PostDetailView(DetailView):
         return context
 
 
-class BlogTagView(ListView):
-    model = Tag    
+class BlogTagView(ListView):   
     template_name = "blog/blog_tags.html"
     context_object_name = 'tags'
+    starting_font_size = 82
     
-    def pag_related(self, related):
-        return [related[x:x+5] for x in range(0, len(related), 5)]
+    def get_published_tags(self):
+        published_tags = []
+        published_posts = Post.objects.filter(pub_date__lte=timezone.now())
+        for post in published_posts:
+            for tag in post.tags.all():
+                published_tags.append((tag, tag.related_post_count()))
+           
+        # remove duplicate tags from list
+        published_tags = list(set(published_tags))
+        
+        # nice one-liner for sorting the list by the related_post_count, which is the second
+        # item in the published_tags tuple. key=lambda x: x[1] tells sort to do this. it then makes
+        # a new list of just the first element (the tag object) of the tuple in descending order.
+        published_tags = [x for x in sorted(published_tags, key=lambda x: x[1], reverse=True)]
+        
+        return published_tags
     
     def get_context_data(self, **kwargs):
         context = super(BlogTagView, self).get_context_data(**kwargs)
-        if 'tag' in self.kwargs.keys():
-            context.update(tag=self.kwargs['tag'])
-            t = Tag.objects.get(tag=context['tag'])
-            context['related'] = pag_related(t.post_set.all())
 
         context['archive'] = archive()
             
         return context
         
-    # def get_queryset(self, **kwargs):
-        # queryset = []
-        # if 'tag' in self.kwargs:
-            # print(self.kwargs['tag'])
-            # queryset = Post.objects.get(tags__exact=self.kwargs['tag'])
-        # else:
-            # print("no tag in kwargs")
-            # print(self.kwargs)
-            # queryset = Tag.objects.all()
-            # print(queryset)
-
-        # return queryset
+    def get_queryset(self, **kwargs):
+        return [x[0] for x in self.get_published_tags()]
             
             
         

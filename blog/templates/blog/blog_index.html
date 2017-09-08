@@ -3,9 +3,34 @@
 
 {% block page_header %}
 <div class="jumbotron">
-    <h1>The Blog</h1>
-    <h3 class="jumbotron-subheading">
-        Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
-    </h3>
+    {% if tag %}
+        <h2>Posts tagged {{ tag }}</h2>
+    {% else %}
+        <h1>The Blog</h1>
+        <h3 class="jumbotron-subheading">
+            Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
+        </h3>
+    {% endif %}
 </div>
 {% endblock page_header %}
+
+{% if tag %}
+    {% block pagination %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <span class="paginator-prev"><a href="{% block pag_prev_url %}{% url 'blog:tags' tag %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a></span>
+        {% endif %}
+        {% for page in paginator.page_range %}
+        {% if page == page_obj.number %}
+        <span class="pagination-cur-page">{{ page_obj.number }}</span>
+        {% else %}
+        <span class="step-links"><a
+                href="{% block pag_step_url %}{% url 'blog:tags' tag %}?page={{ page }}{% endblock %}">{{ page }}</a></span>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:tags' tag %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
+        {% endif %}
+    </div>
+    {% endblock pagination %}
+{% endif %}

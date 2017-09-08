@@ -16,10 +16,14 @@
     {% if tag %}
         <h3>Posts tagged {{ tag }}</h3>
         {% for p in related %}
+            Here
+            {{ p.title }}{{ p.slug }}
+            {% comment %}
             <div>
                 <a href="{% url 'blog:detail' p.slug %}">
                     {{ p.title }}</a>
             </div>
+            {% endcomment %}
         {% endfor %}
     {% endif %}
     {% if tags %}

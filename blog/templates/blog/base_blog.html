@@ -4,6 +4,7 @@
 {% block extra_stylesheets %}
     <link rel="stylesheet" type="text/css"
       href="{% static 'blog/blog_style.css' %}"/>
+    <script src="{% static 'blog/script.js' %}"></script>
 {% endblock extra_stylesheets %}
 
 {% block title %}Daniel Hayes | Blog{% endblock title %}
@@ -16,6 +17,7 @@ active
 {% endblock page_header %}
 <div class="row">
     <div class="col-sm-8 text-center post-container">
+
         {% block post_detail %}
         {% endblock post_detail %}
         {% block post_list %}
@@ -58,26 +60,32 @@ active
             <h1>No posts are available.</h1>
         {% endif %}
         {% endblock %}
-        {% block pagination %}
         <div class="pagination">
             {% if page_obj.has_previous %}
-            <span class="paginator-prev"><a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a></span>
+
+            <span class="paginator-prev">
+                <a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a>
+            </span>
             {% endif %}
             {% for page in paginator.page_range %}
             {% if page == page_obj.number %}
             <span class="pagination-cur-page">{{ page_obj.number }}</span>
             {% else %}
-            <span class="step-links"><a
-                    href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a></span>
+            <span class="step-links">
+                <a href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a>
+            </span>
             {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
             <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
             {% endif %}
         </div>
-        {% endblock pagination %}
     </div>
-    <div class="col-sm-4 text-right post-archive">
+    <div class="col-sm-4 text-right">
+        <span class="archive-button" onclick="openNav()">&#9776; Archive</span>
+    </div>
+    {% comment %}
+<!--    <div class="col-sm-4 text-right post-archive">
         {% block archive %}
         <h4 class="archive-title">Post Archive</h4>
         <div class="btn-group-vertical btn-group-sm">
@@ -93,9 +101,23 @@ active
             {% endfor %}
         </div>
         {% endblock %}
-    </div>
+    </div>-->
+    {% endcomment %}
 </div>
 
+<div id="side-nav" class="side-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    {% for month in archive %}
+    <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}">
+        <div class="text-left">
+            {{ month.month|date:"F, Y" }}
+            <div class="archive-count">
+                <span>({{ month.c }})</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
 
 
 {% endblock %}

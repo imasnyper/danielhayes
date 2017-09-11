@@ -14,23 +14,29 @@
 </div>
 {% endblock page_header %}
 
-{% if tag %}
-    {% block pagination %}
-    <div class="pagination">
-        {% if page_obj.has_previous %}
-        <span class="paginator-prev"><a href="{% block pag_prev_url %}{% url 'blog:tags' tag %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a></span>
-        {% endif %}
-        {% for page in paginator.page_range %}
-        {% if page == page_obj.number %}
-        <span class="pagination-cur-page">{{ page_obj.number }}</span>
-        {% else %}
-        <span class="step-links"><a
-                href="{% block pag_step_url %}{% url 'blog:tags' tag %}?page={{ page }}{% endblock %}">{{ page }}</a></span>
-        {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-        <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:tags' tag %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
-        {% endif %}
-    </div>
-    {% endblock pagination %}
-{% endif %}
+{% block pag_prev_url %}
+    <!--used to prevent a reverse url error during template rendering-->
+    {% url 'blog:tags' tag as pag_prev_url %}
+    {% if pag_prev_url %}
+        {{ pag_prev_url }}?page={{ page_obj.previous_page_number }}
+    {% else %}
+        <!--still have to put this here to make links work again for non-tag indexes-->
+        {% url 'blog:index' %}?page={{ page_obj.previous_page_number }}
+    {% endif %}
+{% endblock %}
+{% block pag_step_url %}
+    {% url 'blog:tags' tag as pag_step_url %}
+    {% if pag_step_url %}
+        {{ pag_step_url }}?page={{ page }}
+    {% else %}
+        {% url 'blog:index' %}?page={{ page }}
+    {% endif %}
+{% endblock %}
+{% block pag_next_url %}
+    {% url 'blog:tags' tag as pag_next_url %}
+    {% if pag_next_url %}
+        {{ pag_next_url }}?page={{ page_obj.next_page_number }}
+    {% else %}
+        {% url 'blog:index' %}?page={{ page_obj.next_page_number }}
+    {% endif %}
+{% endblock %}

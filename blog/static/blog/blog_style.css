@@ -1,11 +1,11 @@
 /*Blog Styling*/
 
-.btn{
+/*.btn{
   background-color: #527D96;
   padding: 10px 10px;
   width: 150px;
   border-color: #042C43;
-}
+}*/
 
 .btn-group-sm {
     padding: 0 auto;
@@ -117,6 +117,66 @@ a:active.jumbotron-archive-links {
 
 .thumbnail {
     width: auto;
+}
+
+/*Side Nav Styling*/
+.archive-button {
+    font-size: 24px;
+}
+
+.archive-button:hover {
+    cursor: pointer;
+}
+
+
+/* The side navigation menu */
+.side-nav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    right: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 75px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the side-nav */
+}
+
+/* The navigation menu links */
+.side-nav a {
+    padding: 8px 8px 8px 64px;
+    text-decoration: none;
+    font-size: 24px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.side-nav a:hover, .offcanvas a:focus{
+    color: silver;
+}
+
+/* Position and style the close button (top right corner) */
+.side-nav .closebtn {
+    position: absolute;
+    top: 85;
+    left: 24px;
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-right .5s;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the side-nav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .side-nav {padding-top: 15px;}
+    .side-nav a {font-size: 18px;}
 }
 
 /*

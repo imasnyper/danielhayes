@@ -50,17 +50,18 @@ class IndexView(ListView):
         
         
     def get_queryset(self, **kwargs):
-        queryset = []
+        self.queryset = []
         
         if 'tag' in self.kwargs.keys():
             tag_object = Tag.objects.get(tag=self.kwargs['tag'])
-            queryset = tag_object.post_set.all().filter(pub_date__lte=timezone.now())
-            queryset = queryset.order_by('pub_date')
+            self.queryset = tag_object.post_set.all().filter(
+                pub_date__lte=timezone.now())
+            self.queryset = self.queryset.order_by('pub_date')
         else:
-            queryset = Post.objects.filter(pub_date__lte=timezone.now())
-            queryset = queryset.order_by('-pub_date')
+            self.queryset = Post.objects.filter(pub_date__lte=timezone.now())
+            self.queryset = self.queryset.order_by('-pub_date')
             
-        return queryset
+        return self.queryset
 
 
 class ArchiveView(ListView):
@@ -177,13 +178,15 @@ class BlogTagView(ListView):
         # remove duplicate tags from list
         published_tags = list(set(published_tags))
         
-        # nice one-liner for sorting the list by the related_post_count, which is the second
-        # item in the published_tags tuple. key=lambda x: x[1] tells sort to do this. it then makes
-        # a new list of just the first element (the tag object) of the tuple in descending order.
-        published_tags = [x for x in sorted(published_tags, key=lambda x: x[1], reverse=True)]
+        # nice one-liner for sorting the list by the related_post_count, which
+        # is the second item in the published_tags tuple. key=lambda x: x[1]
+        # tells sort to do this. it then makes a new list of just the first
+        # element (the tag object) of the tuple in descending order.
+        published_tags = [x for x in sorted(
+            published_tags, key=lambda x: x[1], reverse=True)]
         
         return published_tags
-    
+
     def get_context_data(self, **kwargs):
         context = super(BlogTagView, self).get_context_data(**kwargs)
 

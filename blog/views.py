@@ -166,14 +166,13 @@ class PostDetailView(DetailView):
 class BlogTagView(ListView):   
     template_name = "blog/blog_tags.html"
     context_object_name = 'tags'
-    starting_font_size = 82
     
     def get_published_tags(self):
         published_tags = []
         published_posts = Post.objects.filter(pub_date__lte=timezone.now())
         for post in published_posts:
             for tag in post.tags.all():
-                published_tags.append((tag, tag.related_post_count()))
+                published_tags.append((tag, tag.frequency()))
            
         # remove duplicate tags from list
         published_tags = list(set(published_tags))
@@ -189,13 +188,13 @@ class BlogTagView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogTagView, self).get_context_data(**kwargs)
-
         context['archive'] = archive()
             
         return context
         
     def get_queryset(self, **kwargs):
-        return [x[0] for x in self.get_published_tags()]
+        return sorted([x[0] for x in self.get_published_tags()], 
+            key=lambda x: x.tag)
             
             
         

@@ -14,8 +14,16 @@ class Tag(models.Model):
         r'[0-9a-zA-Z]*$', 'Only alphanumeric characters will be allowed')
     tag = models.CharField(max_length=25, validators=[alphanumeric])
     
-    def related_post_count(self):
+    def tag_post_count(self):
         return len(self.post_set.filter(pub_date__lte=timezone.now()))
+        
+    def total_post_count(self):
+        return len(Post.objects.filter(pub_date__lte=timezone.now()))
+        
+    def frequency(self):
+        tag_post_num = self.tag_post_count()
+        all_posts_num = self.total_post_count()
+        return tag_post_num / all_posts_num
 
     def save(self, *args, **kwargs):
         Tag.full_clean(self)

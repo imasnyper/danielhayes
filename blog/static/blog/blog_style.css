@@ -35,6 +35,7 @@ ul.no-style {
 
 .post-container {
     padding-left: 0;
+    padding-right: 25%;
 }
 
 .post-title {
@@ -78,7 +79,7 @@ ul.no-style {
 
 .jumbotron-archive-text {
     display: inline-block !important;
-    color silver;
+    color: silver;
 }
 
 .jumbotron-archive-links {
@@ -103,6 +104,31 @@ a:active.jumbotron-archive-links {
     text-decoration: none;
 }
 
+a.jumbotron-archive-links {
+    color: silver;
+}
+
+a.tag-links {
+    color: silver;
+}
+
+.tag-links {
+    border-bottom: 1px dashed silver;
+}
+
+a:link.tag-links a:visited.tag-links {
+    text-decoration: none;
+}
+
+a:hover.tag-links {
+    text-decoration: none;
+    border-bottom: 2px dashed silver;
+}
+
+a:active.tag-links {
+    text-decoration: none;
+}
+
 .archive-count{
   float: right;
 }
@@ -120,8 +146,13 @@ a:active.jumbotron-archive-links {
 }
 
 /*Side Nav Styling*/
+.archive-container {
+    padding-right: 25%;
+}
+
 .archive-button {
     font-size: 24px;
+    float: right;
 }
 
 .archive-button:hover {
@@ -175,7 +206,7 @@ a:active.jumbotron-archive-links {
 
 /* On smaller screens, where height is less than 450px, change the style of the side-nav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .side-nav {padding-top: 15px;}
+    .side-nav {padding-top: 75px;}
     .side-nav a {font-size: 18px;}
 }
 

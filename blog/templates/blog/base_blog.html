@@ -16,8 +16,12 @@ active
 {% block page_header %}
 {% endblock page_header %}
 <div class="row">
-    <div class="col-sm-8 text-center post-container">
-
+    <div class="col-sm-12 archive-container">
+        <div class="archive-button" onclick="openNav()">&#9776; Archive</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center post-container">    
         {% block post_detail %}
         {% endblock post_detail %}
         {% block post_list %}
@@ -80,9 +84,6 @@ active
             <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
             {% endif %}
         </div>
-    </div>
-    <div class="col-sm-4 text-right">
-        <span class="archive-button" onclick="openNav()">&#9776; Archive</span>
     </div>
     {% comment %}
 <!--    <div class="col-sm-4 text-right post-archive">

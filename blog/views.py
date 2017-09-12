@@ -114,6 +114,8 @@ class ArchiveView(ListView):
         context = super(ArchiveView, self).get_context_data(**kwargs)
     
         context['archive'] = archive()
+        context['tags'] = sorted([x[0] for x in get_published_tags()], 
+            key=lambda x: x.tag)
         if 'month' in self.kwargs.keys():
             context.update(
                 year=self.kwargs['year'], month=self.kwargs['month'])
@@ -180,6 +182,8 @@ class PostDetailView(DetailView):
                 context['post'])
 
         context['archive'] = archive()
+        context['tags'] = sorted([x[0] for x in get_published_tags()], 
+            key=lambda x: x.tag)
 
         return context
 

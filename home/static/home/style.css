@@ -103,6 +103,11 @@ label {
     margin-top: 30px;
 }
 
+.twitter-follow {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 .navbar-toggle {
   line-height: 75px;
@@ -126,7 +131,7 @@ label {
 
 .navbar-brand {
   font-size: 24px;
-  padding-left: 0px;
+/*   padding-left: 0px; */
   font-family: 'Coda';
   margin-left: 0 !important;
 }
@@ -147,9 +152,13 @@ label {
     margin-right: 0 !important;
 }
 
-.navbar-right li a {
-    padding-right: 0;
+.navbar-right li {
+    height: 75px;
 }
+
+/* .navbar-right li a {
+    padding-right: 0;
+} */
 
 
 

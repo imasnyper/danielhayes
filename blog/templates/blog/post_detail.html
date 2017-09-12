@@ -1,10 +1,11 @@
 {% extends 'blog/base_blog.html' %}
+{% load blog_extras %}
 
 {% block title %}Blog | {{ post.title|title }}{% endblock title %}
 
 {% block page_header %}
 <div class="jumbotron">
-    <h2>{{ post.title|title }}</h2>
+    <h1>{{ post.title|title }}</h1>
     <h4>Written by {{ post.author|title }} on {{post.pub_date|date:"l, F j, Y" }}</h4>
     {% if post.tags %}
         <h4>Tags: 

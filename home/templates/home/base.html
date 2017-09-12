@@ -22,8 +22,9 @@
 
     {% block extra_stylesheets %}{% endblock extra_stylesheets %}
 
-    <title>{% block title %}Daniel Hayes{% endblock title %}</title>
+    <title>{% block title %}Daniel Hayes - Python and Django Blogger{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="From pure python scripts, to full fledged Django applications; Discover the world of Python through the eyes of Daniel Hayes!">
 </head>
 <body>
 <div id="main">
@@ -53,6 +54,11 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="twitter-follow">
+                            <a href="https://twitter.com/imasnyper" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @imasnyper</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    </li>
                     <li class="{% block contact_active %}{% endblock %}">
                         <a href="{% url 'home:contact' %}">Contact</a>
                     </li>

@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load blog_extras %}
 
 {% block extra_stylesheets %}
     <link rel="stylesheet" type="text/css"
@@ -16,12 +17,10 @@ active
 {% block page_header %}
 {% endblock page_header %}
 <div class="row">
-    <div class="col-sm-12 archive-container">
-        <div class="archive-button" onclick="openNav()">&#9776; Archive</div>
-    </div>
+
 </div>
 <div class="row">
-    <div class="col-sm-12 text-center post-container">    
+    <div class="col-sm-8 text-center post-container">    
         {% block post_detail %}
         {% endblock post_detail %}
         {% block post_list %}
@@ -85,6 +84,10 @@ active
             {% endif %}
         </div>
     </div>
+    <div class="col-sm-4 archive-container text-right">
+        <div class="archive-button" onclick="openArchiveNav()"><span class="hamburger">&#9776;</span>Archive</div>
+        <div class="tag-button" onclick="openTagNav()"><span class="hamburger">&#9776;</span>Tags</div>
+    </div>
     {% comment %}
 <!--    <div class="col-sm-4 text-right post-archive">
         {% block archive %}
@@ -106,8 +109,8 @@ active
     {% endcomment %}
 </div>
 
-<div id="side-nav" class="side-nav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<div id="archive-nav" class="archive-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeArchiveNav()">&times;</a>
     {% for month in archive %}
     <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}">
         <div class="text-left">
@@ -118,6 +121,20 @@ active
         </div>
     </a>
     {% endfor %}
+</div>
+
+<div id="tag-nav" class="tag-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeTagNav()">&times;</a>
+    {% if tags %}
+        <a href="{% url 'blog:tags' %}"><h3>Tag Cloud</h3></a>
+        {% for t in tags %}
+            <div class="tag" >
+                <a style="font-size:{{ t.frequency|multiply:100}}px !important;" href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        No tags :(
+    {% endif %}
 </div>
 
 

@@ -32,7 +32,25 @@ def archive():
     a = a.order_by('month')
 
     return a
-
+    
+def get_published_tags():
+    published_tags = []
+    published_posts = Post.objects.filter(pub_date__lte=timezone.now())
+    for post in published_posts:
+        for tag in post.tags.all():
+            published_tags.append((tag, tag.frequency()))
+       
+    # remove duplicate tags from list
+    published_tags = list(set(published_tags))
+    
+    # nice one-liner for sorting the list by the related_post_count, which
+    # is the second item in the published_tags tuple. key=lambda x: x[1]
+    # tells sort to do this. it then makes a new list of just the first
+    # element (the tag object) of the tuple in descending order.
+    published_tags = [x for x in sorted(
+        published_tags, key=lambda x: x[1], reverse=True)]
+    
+    return published_tags
 
 class IndexView(ListView):
     template_name = "blog/blog_index.html"
@@ -45,6 +63,9 @@ class IndexView(ListView):
         context['archive'] = archive()
         if 'tag' in self.kwargs.keys():
             context['tag'] = Tag.objects.get(tag=self.kwargs['tag'])
+            
+        context['tags'] = sorted([x[0] for x in get_published_tags()], 
+            key=lambda x: x.tag)
             
         return context
         
@@ -166,25 +187,6 @@ class PostDetailView(DetailView):
 class BlogTagView(ListView):   
     template_name = "blog/blog_tags.html"
     context_object_name = 'tags'
-    
-    def get_published_tags(self):
-        published_tags = []
-        published_posts = Post.objects.filter(pub_date__lte=timezone.now())
-        for post in published_posts:
-            for tag in post.tags.all():
-                published_tags.append((tag, tag.frequency()))
-           
-        # remove duplicate tags from list
-        published_tags = list(set(published_tags))
-        
-        # nice one-liner for sorting the list by the related_post_count, which
-        # is the second item in the published_tags tuple. key=lambda x: x[1]
-        # tells sort to do this. it then makes a new list of just the first
-        # element (the tag object) of the tuple in descending order.
-        published_tags = [x for x in sorted(
-            published_tags, key=lambda x: x[1], reverse=True)]
-        
-        return published_tags
 
     def get_context_data(self, **kwargs):
         context = super(BlogTagView, self).get_context_data(**kwargs)
@@ -193,7 +195,7 @@ class BlogTagView(ListView):
         return context
         
     def get_queryset(self, **kwargs):
-        return sorted([x[0] for x in self.get_published_tags()], 
+        return sorted([x[0] for x in get_published_tags()], 
             key=lambda x: x.tag)
             
             

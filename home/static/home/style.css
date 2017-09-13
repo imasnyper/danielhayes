@@ -1,4 +1,4 @@
-/* /* Contact Styling */
+ /* Contact Styling */
 
 form {
     display: inline-block;
@@ -8,14 +8,10 @@ form {
     background-color: snow;
 }
 
-.cont {
-    background: blue;
-}
-
 
 /* Home Styling  */
 
-.color-primary-0 { color: #22516D }	
+.color-primary-0 { color: #22516D }
 .color-primary-1 { color: #BBCFDC } 
 .color-primary-2 { color: #527D96 }
 .color-primary-3 { color: #042C43 }
@@ -32,8 +28,6 @@ form {
     margin-bottom: 60px;
     box-shadow: 0 5px 2px darkgrey;
     border-radius: 0 !important;
-/*     padding-left: 7.5% !important;
-    padding-right: 7.5% !important; */
 }
 
 .jumbotron-subheading {
@@ -50,8 +44,6 @@ form {
 @media (max-width: 768px) {
   .jumbotron {
     background-size: 200%
-/*     padding-left: 7.5%;
-    padding-right: 7.5%; */
   }
 }
 
@@ -59,10 +51,9 @@ form {
     padding: 0 7%;
 }
 
-.container-fluid.content {
-  padding: 50px 0 0;
-  background-color: snow;
-  font-family: 'Share Tech Mono', monospace;
+.content {
+    padding: 50px 0 0;
+    background-color: snow;
 }
 
 .blurb {
@@ -71,19 +62,12 @@ form {
 }
 
 .row {
-/* 	padding: 0 7.5%; */
 	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
 }
 
 label {
     display: block;
 }
-
-/* .center-hor {
-    margin: 0 auto;
-    width: 50%;
-    text-align: center;
-}  */
 
 .right-align-hor {
     text-align: right;

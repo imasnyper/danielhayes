@@ -10,15 +10,36 @@
 <div class="home-container">
     {% if blurbs %}
         {% for blurb in blurbs %}
-            {% if forloop.first %}<div class="row">{% endif %}
-            <div class="col-sm-4 blurb">
-                <h2>{{ blurb.title }}</h2>
-                <p>
-                    {{ blurb.text }}
-                </p>
+            <div class="row">
+            {% if blurb|length == 3 %}
+                {% for b in blurb %}
+                    <div class="col-sm-4 blurb">
+                        <h2>{{ b.title }}</h2>
+                        <p>
+                            {{ b.text|safe }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% elif blurb|length == 2 %}
+                {% for b in blurb %}
+                    <div class="col-sm-6 blurb">
+                        <h2>{{ b.title }}</h2>
+                        <p>
+                            {{ b.text|safe }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for b in blurb %}
+                    <div class="col-sm-12 blurb">
+                        <h2>{{ b.title }}</h2>
+                        <p>
+                            {{ b.text|safe }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
             </div>
-            {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-            {% if forloop.last %}</div>{% endif %}
         {% endfor %}
     {% endif %}
 </div>

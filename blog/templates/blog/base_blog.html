@@ -16,126 +16,107 @@ active
 {% block content %}
 {% block page_header %}
 {% endblock page_header %}
-<div class="row">
+<div class="blog-container">
+    <div class="row">
+        <div class="col-sm-8 text-center post-container">    
+            {% block post_detail %}
+            {% endblock post_detail %}
+            {% block post_list %}
+            {% if posts %}
+                {% for post in posts %}
+                <a class="post" href="{% url 'blog:detail' post.slug %}">
+                    <div class="post-card">
+                        <h3 class="post-title">
+                            {{ post.title }}
+                        </h3>
+        <!--                <h5 class="post-author">
+                            Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
+                        </h5>-->
+                        <h5 class="post-author">
+                            Published on {{ post.pub_date|date:"l, F j, Y" }}
+                        </h5>
+                        {% if post.tags.all %}
+                            <h6>
+                                Tags:
+                                {% for tag in post.tags.all %}
+                                    {% if forloop.last %}
+                                        <span>
+                                            {{ tag }}
+                                        </span>
+                                    {% else %}
+                                        <span>
+                                            {{ tag }},
+                                        </span>
+                                    {% endif %}
+                                {% endfor %}
+                            </h6>
+                        {% endif %}
+                        <p class="text-align post-index-content">
+                            {{ post.post|linebreaksbr|truncatewords:50 }}
+                        </p>
+                    </div>
+                </a>
+                {% endfor %}
+            {% else %}
+                <h1>No posts are available.</h1>
+            {% endif %}
+            {% endblock %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
 
+                <span class="paginator-prev">
+                    <a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a>
+                </span>
+                {% endif %}
+                {% for page in paginator.page_range %}
+                {% if page == page_obj.number %}
+                <span class="pagination-cur-page">{{ page_obj.number }}</span>
+                {% else %}
+                <span class="step-links">
+                    <a href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a>
+                </span>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-sm-4 archive-container text-right">
+            <div class="archive-button" onclick="openArchiveNav()"><span class="hamburger">&#9776;</span>Archive</div>
+            <div class="tag-button" onclick="openTagNav()"><span class="hamburger">&#9776;</span>Tags</div>
+        </div>
+    </div>
 </div>
-<div class="row">
-    <div class="col-sm-8 text-center post-container">    
-        {% block post_detail %}
-        {% endblock post_detail %}
-        {% block post_list %}
-        {% if posts %}
-            {% for post in posts %}
-            <a class="post" href="{% url 'blog:detail' post.slug %}">
-                <div class="post-card">
-                    <h3 class="post-title">
-                        {{ post.title }}
-                    </h3>
-    <!--                <h5 class="post-author">
-                        Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-                    </h5>-->
-                    <h5 class="post-author">
-                        Published on {{ post.pub_date|date:"l, F j, Y" }}
-                    </h5>
-                    {% if post.tags.all %}
-                        <h6>
-                            Tags:
-                            {% for tag in post.tags.all %}
-                                {% if forloop.last %}
-                                    <span>
-                                        {{ tag }}
-                                    </span>
-                                {% else %}
-                                    <span>
-                                        {{ tag }},
-                                    </span>
-                                {% endif %}
-                            {% endfor %}
-                        </h6>
-                    {% endif %}
-                    <p class="text-align post-index-content">
-                        {{ post.post|linebreaksbr|truncatewords:50 }}
-                    </p>
+
+<div class="blog-container">
+    <div id="archive-nav" class="archive-nav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeArchiveNav()">&times;</a>
+        {% for month in archive %}
+        <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}">
+            <div class="text-left">
+                {{ month.month|date:"F, Y" }}
+                <div class="archive-count">
+                    <span>({{ month.c }})</span>
                 </div>
-            </a>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div id="tag-nav" class="tag-nav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeTagNav()">&times;</a>
+        {% if tags %}
+            <a href="{% url 'blog:tags' %}"><h3>Tag Cloud</h3></a>
+            {% for t in tags %}
+                <div class="tag" >
+                    <a style="font-size:{{ t.frequency|multiply:100}}px !important;" href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
+                </div>
             {% endfor %}
         {% else %}
-            <h1>No posts are available.</h1>
+            No tags :(
         {% endif %}
-        {% endblock %}
-        <div class="pagination">
-            {% if page_obj.has_previous %}
-
-            <span class="paginator-prev">
-                <a href="{% block pag_prev_url %}{% url 'blog:index' %}?page={{ page_obj.previous_page_number }}{% endblock %}">Previous</a>
-            </span>
-            {% endif %}
-            {% for page in paginator.page_range %}
-            {% if page == page_obj.number %}
-            <span class="pagination-cur-page">{{ page_obj.number }}</span>
-            {% else %}
-            <span class="step-links">
-                <a href="{% block pag_step_url %}{% url 'blog:index' %}?page={{ page }}{% endblock %}">{{ page }}</a>
-            </span>
-            {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <span class="paginator-next"><a href="{% block pag_next_url %}{% url 'blog:index' %}?page={{ page_obj.next_page_number }}{% endblock %}">Next</a></span>
-            {% endif %}
-        </div>
     </div>
-    <div class="col-sm-4 archive-container text-right">
-        <div class="archive-button" onclick="openArchiveNav()"><span class="hamburger">&#9776;</span>Archive</div>
-        <div class="tag-button" onclick="openTagNav()"><span class="hamburger">&#9776;</span>Tags</div>
-    </div>
-    {% comment %}
-<!--    <div class="col-sm-4 text-right post-archive">
-        {% block archive %}
-        <h4 class="archive-title">Post Archive</h4>
-        <div class="btn-group-vertical btn-group-sm">
-            {% for month in archive %}
-            <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}" class="btn btn-primary">
-                <div class="text-left">
-                    {{ month.month|date:"F, Y" }}
-                    <div class="archive-count">
-                        <span>({{ month.c }})</span>
-                    </div>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-        {% endblock %}
-    </div>-->
-    {% endcomment %}
 </div>
-
-<div id="archive-nav" class="archive-nav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeArchiveNav()">&times;</a>
-    {% for month in archive %}
-    <a href="{% url 'blog:archive' month.month|date:'Y' month.month|date:'m' %}">
-        <div class="text-left">
-            {{ month.month|date:"F, Y" }}
-            <div class="archive-count">
-                <span>({{ month.c }})</span>
-            </div>
-        </div>
-    </a>
-    {% endfor %}
-</div>
-
-<div id="tag-nav" class="tag-nav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeTagNav()">&times;</a>
-    {% if tags %}
-        <a href="{% url 'blog:tags' %}"><h3>Tag Cloud</h3></a>
-        {% for t in tags %}
-            <div class="tag" >
-                <a style="font-size:{{ t.frequency|multiply:100}}px !important;" href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
-            </div>
-        {% endfor %}
-    {% else %}
-        No tags :(
-    {% endif %}
-</div>
-
 
 {% endblock %}

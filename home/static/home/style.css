@@ -1,4 +1,4 @@
-/* Contact Styling */
+/* /* Contact Styling */
 
 form {
     display: inline-block;
@@ -13,16 +13,16 @@ form {
 }
 
 
-/* Home Styling */
+/* Home Styling  */
 
-.color-primary-0 { color: #22516D }	/* Main Primary color */
-.color-primary-1 { color: #BBCFDC } /* light to dark */
+.color-primary-0 { color: #22516D }	
+.color-primary-1 { color: #BBCFDC } 
 .color-primary-2 { color: #527D96 }
 .color-primary-3 { color: #042C43 }
 .color-primary-4 { color: #000C12 }
 
 .jumbotron {
-    background-image: url('images/bg.png');
+     background-image: url('images/bg.png');
     background-position-x: 0px;
     background-position-y: 0px;
     background-size: 100%;
@@ -32,8 +32,8 @@ form {
     margin-bottom: 60px;
     box-shadow: 0 5px 2px darkgrey;
     border-radius: 0 !important;
-    padding-left: 7.5% !important;
-    padding-right: 7.5% !important;
+/*     padding-left: 7.5% !important;
+    padding-right: 7.5% !important; */
 }
 
 .jumbotron-subheading {
@@ -50,16 +50,18 @@ form {
 @media (max-width: 768px) {
   .jumbotron {
     background-size: 200%
-    padding-left: 7.5%;
-    padding-right: 7.5%;
+/*     padding-left: 7.5%;
+    padding-right: 7.5%; */
   }
 }
 
+.home-container {
+    padding: 0 7%;
+}
+
 .container-fluid.content {
-  padding: 75px 0px 0px;
+  padding: 50px 0 0;
   background-color: snow;
-  min-height: 100vh;
-  min-width: 450px;
   font-family: 'Share Tech Mono', monospace;
 }
 
@@ -69,7 +71,7 @@ form {
 }
 
 .row {
-	padding: 0 7.5%;
+/* 	padding: 0 7.5%; */
 	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
 }
 
@@ -77,11 +79,11 @@ label {
     display: block;
 }
 
-.center-hor {
+/* .center-hor {
     margin: 0 auto;
     width: 50%;
     text-align: center;
-}
+}  */
 
 .right-align-hor {
     text-align: right;
@@ -92,15 +94,14 @@ label {
 .footer {
     padding: 20px 20px;
     margin: 20px 0 0 0;
-    background-position-x: 0px;
-    background-position-y: 0%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     background-color: #22516d;
     color: #bbcfdc;
     text-align: right;
     margin-top: 30px;
+}
+
+.twitter-link {
+    height: 50px;
 }
 
 .twitter-follow {
@@ -112,31 +113,31 @@ label {
 .navbar-toggle {
   line-height: 75px;
   height: 30px;
-  margin: 23px 0;
+/*   margin: 23px 0; */
 }
 
-.navbar-brand,
+/* .navbar-brand,
 .navbar-nav li a {
     line-height: 75px;
     height: 75px;
     padding-top: 0;
     padding-left: 25px;
     padding-right: 25px;
-}
+} */
 
-.nav-container {
+/* .nav-container {
   padding-left: 7.5%;
   padding-right: 7.5%;
-}
+} */
 
 .navbar-brand {
-  font-size: 24px;
+  /* font-size: 24px; */
 /*   padding-left: 0px; */
   font-family: 'Coda';
   margin-left: 0 !important;
 }
 
-.navbar-nav li a {
+/* .navbar-nav li a {
   font-size: 16px;
 }
 
@@ -146,15 +147,15 @@ label {
   margin: 0;
   font-size: 16px;
   padding-left: 40px;
-}
+} */
 
 .navbar-right {
     margin-right: 0 !important;
 }
 
-.navbar-right li {
+/* .navbar-right li {
     height: 75px;
-}
+} */
 
 /* .navbar-right li a {
     padding-right: 0;
@@ -269,4 +270,4 @@ label {
 .table {
   margin: auto;
   border: 2px solid gray;
-}
+} */

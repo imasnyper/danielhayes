@@ -7,8 +7,9 @@
   border-color: #042C43;
 }*/
 
-.btn-group-sm {
-    padding: 0 auto;
+
+.blog-container {
+    padding: 0 7%;
 }
 
 img{
@@ -34,7 +35,7 @@ ul.no-style {
 }
 
 .post-container {
-    padding-left: 0;
+    padding: 0;
 }
 
 .post-title {
@@ -190,7 +191,7 @@ a:active.tag-links {
 .archive-nav a {
     padding: 8px 8px 8px 64px;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 22px;
     color: #818181;
     display: block;
     transition: 0.3s
@@ -238,7 +239,7 @@ a:active.tag-links {
 }
 
 .tag-nav h3 {
-    padding: 8px 8px 8px 64px;
+    padding: 8px 8px 8px 8px;
     color: #818181;
 }
 
@@ -259,14 +260,14 @@ a:active.tag-links {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-    transition: margin-right .5s;
+    transition: 0.5s;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the archive-nav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
+/* @media screen and (max-height: 450px) {
     .archive-nav {padding-top: 75px;}
     .archive-nav a {font-size: 18px;}
-}
+} */
 
 /*
 .post-archive{

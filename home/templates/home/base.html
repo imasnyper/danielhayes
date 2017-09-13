@@ -28,8 +28,8 @@
 </head>
 <body>
 <div id="main">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid nav-container">
+    <nav class="container-fluid navbar navbar-default navbar-fixed-top">
+        <div class="nav-container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
                     <span class="icon-bar"></span>
@@ -54,7 +54,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <li class="twitter-link">
                         <div class="twitter-follow">
                             <a href="https://twitter.com/imasnyper" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @imasnyper</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </div>
@@ -63,22 +63,6 @@
                         <a href="{% url 'home:contact' %}">Contact</a>
                     </li>
                 </ul>
-                {% comment %}
-                <!--<ul class="nav navbar-nav navbar-right">-->
-                    <!--{% if request.user.is_authenticated %}-->
-                    <!--<li class="navbar-text">-->
-                        <!--Hello {{ request.user.username|title }}.-->
-                    <!--</li>-->
-                    <!--<li class="padding-left-0">-->
-                        <!--<a href="{% url 'logout' %}">Logout?</a>-->
-                    <!--</li>-->
-                    <!--{% else %}-->
-                    <!--<li>-->
-                        <!--<a href="{% url 'login' %}">Login</a>-->
-                    <!--</li>-->
-                    <!--{% endif %}-->
-                <!--</ul>-->
-                {% endcomment %}
             </div>
         </div>
     </nav>

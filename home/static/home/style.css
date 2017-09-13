@@ -8,6 +8,12 @@
     background-color: snow;
 }
 
+@media (max-width: 320px) {
+    #id_message {
+        width: 250px;
+    }
+}
+
 
 /* Home Styling  */
 

@@ -13,7 +13,7 @@
         <div class="col-sm-4 blurb">
             <h2>{{ blurb.title }}</h2>
             <p>
-                {{ blurb.text }}
+                {{ blurb.text|safe }}
             </p>
         </div>
         {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}

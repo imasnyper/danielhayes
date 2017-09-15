@@ -1,13 +1,5 @@
 /*Blog Styling*/
 
-/*.btn{
-  background-color: #527D96;
-  padding: 10px 10px;
-  width: 150px;
-  border-color: #042C43;
-}*/
-
-
 .blog-container {
     padding: 0 7%;
 }
@@ -21,7 +13,6 @@ img{
 
 a.post {
   display: block;
-  /*margin: 0 10%;*/
 }
 
 a.post:hover {
@@ -258,10 +249,7 @@ a:active.tag-links {
     padding: 0;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: 0.5s;
-}
+
 
 /* On smaller screens, where height is less than 450px, change the style of the archive-nav (less padding and a smaller font size) */
 /* @media screen and (max-height: 450px) {

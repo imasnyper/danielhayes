@@ -4,6 +4,17 @@
     display: inline-block;
 } */
 
+/* for sticky footer */
+html, body {
+    height: 100%;
+}
+
+/* for sticky footer */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 #id_contact_name, #id_contact_email, #id_message {
     background-color: snow;
 }
@@ -59,9 +70,10 @@
 }
 
 .content {
-    padding: 50px 0 0;
+    padding: 50px 0 30px;
     background-color: snow;
     font-family: 'Share Tech Mono', monospace;
+    flex: 1 0 auto; /* for sticky footer */
 }
 
 .blurb {
@@ -85,11 +97,9 @@ label {
 
 .footer {
     padding: 20px 20px;
-    margin: 20px 0 0 0;
     background-color: #22516d;
     color: #bbcfdc;
     text-align: right;
-    margin-top: 30px;
 }
 
 .twitter-link {

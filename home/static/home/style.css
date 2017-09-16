@@ -54,7 +54,7 @@ body {
 @media (max-width: 500px) {
   .jumbotron {
     background-image: url('images/bg-2.png');
-    background-size: 200;
+    background-size: 200%;
   }
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .home-container {
-    /*padding: 0 7%;*/
+    padding: 0 7%;
     margin: 0;
 }
 

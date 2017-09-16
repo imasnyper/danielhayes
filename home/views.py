@@ -11,6 +11,7 @@ from .models import Blurb
 # Create your views here.
 def index(request):
     blurbs = Blurb.objects.order_by("order_num")
+    blurbs = [blurbs[i:i+3] for i in range(0, len(blurbs), 3)]
     form_class = ContactForm
 
     if request.method == 'POST':

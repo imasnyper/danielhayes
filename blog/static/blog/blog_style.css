@@ -1,13 +1,5 @@
 /*Blog Styling*/
 
-/*.btn{
-  background-color: #527D96;
-  padding: 10px 10px;
-  width: 150px;
-  border-color: #042C43;
-}*/
-
-
 .blog-container {
     padding: 0 7%;
 }
@@ -21,7 +13,6 @@ img{
 
 a.post {
   display: block;
-  /*margin: 0 10%;*/
 }
 
 a.post:hover {
@@ -257,14 +248,3 @@ a:active.tag-links {
     margin: 0;
     padding: 0;
 }
-
-/* On smaller screens, where height is less than 450px, change the style of the archive-nav (less padding and a smaller font size) */
-/* @media screen and (max-height: 450px) {
-    .archive-nav {padding-top: 75px;}
-    .archive-nav a {font-size: 18px;}
-} */
-
-/*
-.post-archive{
-  padding: 0 7%;
-}*/

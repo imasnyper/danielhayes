@@ -48,12 +48,14 @@ form {
 }
 
 .home-container {
-    padding: 0 7%;
+    /*padding: 0 7%;*/
+    margin: 0;
 }
 
 .content {
     padding: 50px 0 0;
     background-color: snow;
+    font-family: 'Share Tech Mono', monospace;
 }
 
 .blurb {

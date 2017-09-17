@@ -39,7 +39,6 @@ def index(request):
                 headers={'Reply-To': contact_email}
             )
             email.send()
-            print(f"sent email with content: \n{content}\nto daniel@dhayes.me")
             return redirect('home:home')
 
     context = {'blurbs': blurbs,

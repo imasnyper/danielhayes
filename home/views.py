@@ -34,11 +34,12 @@ def index(request):
             email = EmailMessage(
                 "New contact form submission",
                 content,
-                "dhayes" + "",
-                ['danihaye@gmail.com'],
+                'daniel@dhayes.me',
+                ['daniel@dhayes.me'],
                 headers={'Reply-To': contact_email}
             )
             email.send()
+            print(f"sent email with content: \n{content}\nto daniel@dhayes.me")
             return redirect('home:home')
 
     context = {'blurbs': blurbs,

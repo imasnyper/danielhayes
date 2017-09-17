@@ -27,6 +27,9 @@ with open(os.path.join(BASE_DIR, 'danielhayes/secret_key.txt')) as f:
 with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
 
+with open(os.path.join(BASE_DIR, 'danielhayes/email_pass.txt')) as f:
+    EMAIL_PASS = f.read().strip()
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -87,12 +90,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'danihaye@gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-EMAIL_PORT = 1025
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+DEFAULT_FROM_EMAIL = 'daniel@dhayes.me'
+EMAIL_HOST_USER = 'daniel@dhayes.me'
+EMAIL_HOST_PASSWORD = EMAIL_PASS
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 
 
 # Database

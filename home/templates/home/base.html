@@ -16,6 +16,9 @@
     <link rel="stylesheet" type="text/css"
           href="{% static 'home/style.css' %}"/>
 
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'home/navbar-style.css' %}"/>
+
     <link href="https://fonts.googleapis.com/css?family=Coda|Lato:300" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
@@ -45,11 +48,6 @@
         </div>
         <div class="collapse navbar-collapse" id="MyNavbar">
             <ul class="nav navbar-nav">
-                {% comment %}
-                <!--<li class="{% block home_active %}{% endblock %}">-->
-                    <!--<a href="{% url 'home:home' %}">Home</a>-->
-                <!--</li>-->
-                {% endcomment %}
                 <li class="{% block blog_active %}{% endblock %}">
                     <a href="{% url 'blog:index' %}">Blog</a>
                 </li>
@@ -57,7 +55,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="github-link">
                     <div class="github-follow">
-                        <a class="github-button" href="https://github.com/imasnyper" aria-label="Follow @imasnyper on GitHub">Follow @imasnyper</a>
+                        <a class="github-button" href="https://github.com/imasnyper" aria-label="Follow @imasnyper on GitHub">Follow</a>
                     </div>
                 </li>
                 <li class="twitter-link">

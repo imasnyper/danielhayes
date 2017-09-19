@@ -31,7 +31,7 @@ with open(os.path.join(BASE_DIR, 'danielhayes/email_pass.txt')) as f:
     EMAIL_PASS = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'autofixture',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

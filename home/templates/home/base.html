@@ -55,12 +55,15 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li class="github-link">
+                    <div class="github-follow">
+                        <a class="github-button" href="https://github.com/imasnyper" aria-label="Follow @imasnyper on GitHub">Follow @imasnyper</a>
+                    </div>
+                </li>
                 <li class="twitter-link">
                     <div class="twitter-follow">
                         <a href="https://twitter.com/imasnyper" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @imasnyper</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
-                    <!-- Place this tag where you want the button to render. -->
-                    <a class="github-button" href="https://github.com/imasnyper" aria-label="Follow @imasnyper on GitHub">Follow @imasnyper</a>
                 </li>
                 <li class="{% block contact_active %}{% endblock %}">
                     <a href="{% url 'home:contact' %}">Contact</a>
@@ -79,6 +82,7 @@
 {% endblock footer %}
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+{% block extra_scripts %}{% endblock %}
 </body>
 </html>
 

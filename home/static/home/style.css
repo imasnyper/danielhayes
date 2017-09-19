@@ -74,6 +74,7 @@ body {
     background-color: snow;
     font-family: 'Share Tech Mono', monospace;
     flex: 1 0 auto; /* for sticky footer */
+    margin: 0;
 }
 
 .blurb {
@@ -102,6 +103,10 @@ label {
     text-align: right;
 }
 
+.github-link {
+  height: 50px;
+}
+
 .twitter-link {
     height: 50px;
 }
@@ -110,6 +115,14 @@ label {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    padding: 15px;
+}
+
+.github-follow {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 15px;
 }
 
 .navbar-toggle {

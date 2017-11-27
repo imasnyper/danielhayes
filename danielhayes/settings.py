@@ -30,6 +30,9 @@ with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
 with open(os.path.join(BASE_DIR, 'danielhayes/email_pass.txt')) as f:
     EMAIL_PASS = f.read().strip()
 
+with open(os.path.join(BASE_DIR, 'danielhayes/disqus_key.txt')) as f:
+    DISQUS_API_KEY = f.read().strip()
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -159,3 +162,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DISQUS_WEBSITE_SHORTNAME = 'dhayes'

@@ -34,7 +34,6 @@ ul.no-style {
 }
 
 .post-content {
-  min-height: 600px; /*stretch page if post is short*/
   max-width: 600px; /*keep paragraph a readable width*/
   margin: 0 auto; /*center horizontally*/
 }
@@ -248,3 +247,4 @@ a:active.tag-links {
     margin: 0;
     padding: 0;
 }
+

@@ -25,7 +25,7 @@
 {% block post_detail %}
 <div class="post-content">
     <div class="post-content-text">
-        {{ post.post|linebreaksbr }}
+        {{ post.post|safe }}
     </div>
 
     {% if post.postimage_set %}
@@ -52,10 +52,7 @@
         </div>
     {% endif %}
 </div>
-
-
 {% endblock post_detail %}
-
 
 {% block post_list %}
 {% endblock post_list %}

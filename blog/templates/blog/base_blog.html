@@ -52,7 +52,7 @@ active
                             </h6>
                         {% endif %}
                         <p class="text-align post-index-content">
-                            {{ post.post|linebreaksbr|truncatewords:50 }}
+                            {{ post.post|nbsp|striptags|linebreaksbr|truncatewords:50 }}
                         </p>
                     </div>
                 </a>

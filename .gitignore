@@ -8,4 +8,5 @@ db.sqlite3
 danielhayes/secret_key.txt
 danielhayes/db_pass.txt
 danielhayes/email_pass.txt
-static/
+danielhayes/disqus_key.txt
+/static/

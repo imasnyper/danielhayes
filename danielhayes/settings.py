@@ -36,8 +36,8 @@ with open(os.path.join(BASE_DIR, 'danielhayes/disqus_key.txt')) as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['.dhayes.me', '104.207.140.153']
 
 # Application definition
 
@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     'autofixture',
     'tinymce',
 ]
@@ -68,7 +68,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'danielhayes.urls'
 
-LOGIN_REDIRECT_URL = 'home:home'
+#LOGIN_REDIRECT_URL = 'home:home'
 
 TEMPLATES = [
     {

@@ -7,6 +7,8 @@ from django.template.loader import get_template
 from .forms import ContactForm
 from .models import Blurb
 
+from .utils import gmail_backend
+
 
 # Create your views here.
 def index(request):
@@ -31,14 +33,14 @@ def index(request):
             }
             content = template.render(context)
 
-            email = EmailMessage(
-                "New contact form submission",
+            service = gmail_backend.set_up()
+            email = gmail_backend.create_message(
+                'daniel@dhayes.me', 
+                'danihaye@gmail.com',
+                "New Contact Form Submission from {}".format(contact_email),
                 content,
-                'daniel@dhayes.me',
-                ['daniel@dhayes.me'],
-                headers={'Reply-To': contact_email}
             )
-            email.send()
+            sent = gmail_backend.send_message(service, 'daniel@dhayes.me' , email)
             return redirect('home:home')
 
     context = {'blurbs': blurbs,

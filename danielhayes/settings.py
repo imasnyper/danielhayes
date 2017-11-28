@@ -34,10 +34,11 @@ with open(os.path.join(BASE_DIR, 'danielhayes/disqus_key.txt')) as f:
     DISQUS_API_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['.dhayes.me', '104.207.140.153']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+if not DEBUG:
+    ALLOWED_HOSTS = ['.dhayes.me', '104.207.140.153']
 
 # Application definition
 

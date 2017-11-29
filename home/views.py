@@ -68,14 +68,14 @@ def contact(request):
             }
             content = template.render(context)
 
-            email = EmailMessage(
-                "New contact form submission",
+            service = gmail_backend.set_up()
+            email = gmail_backend.create_message(
+                'daniel@dhayes.me', 
+                'danihaye@gmail.com',
+                "New Contact Form Submission from {}".format(contact_email),
                 content,
-                "dhayes" + "",
-                ['danihaye@gmail.com'],
-                headers={'Reply-To': contact_email}
             )
-            email.send()
+            sent = gmail_backend.send_message(service, 'daniel@dhayes.me' , email)
             return redirect('home:home')
 
     context = {'form': form_class}

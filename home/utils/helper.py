@@ -19,7 +19,7 @@ except ImportError:
     flags = None
 
 SCOPES = 'https://www.googleapis.com/auth/gmail.send'
-CLIENT_SECRET_FILE = 'C:\\Users\\Shop\\Documents\\Daniel\\danielhayes\\home\\utils\\client_secret.json'
+CLIENT_SECRET_FILE = '/home/daniel/Dev/Python/Django/danielhayes/home/utils/client_secret.json'
 APPLICATION_NAME = 'dhayes.me Contact Form'
 
 def get_credentials():

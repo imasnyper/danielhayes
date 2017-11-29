@@ -64,12 +64,13 @@ def set_up():
     return service
 
 
-def create_message(sender, to, subject, message_text):
+def create_message(sender, to, subject, message_text, contact_email):
     message = MIMEMultipart()
     message['to'] = to
     message['from'] = sender
     message['subject'] = subject
-    message['reply-to'] = sender
+    message['reply-to'] = contact_email
+    message['return-path'] = contact_email
     msg = MIMEText(message_text)
     message.attach(msg)
     raw = base64.urlsafe_b64encode(message.as_bytes())

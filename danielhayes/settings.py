@@ -16,6 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -23,18 +25,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 with open(os.path.join(BASE_DIR, 'danielhayes/secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
-
 with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
 
-with open(os.path.join(BASE_DIR, 'danielhayes/email_pass.txt')) as f:
-    EMAIL_PASS = f.read().strip()
-
-with open(os.path.join(BASE_DIR, 'danielhayes/disqus_key.txt')) as f:
-    DISQUS_API_KEY = f.read().strip()
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if not DEBUG:
@@ -95,13 +88,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-DEFAULT_FROM_EMAIL = 'daniel@dhayes.me'
-EMAIL_HOST_USER = 'daniel@dhayes.me'
-EMAIL_HOST_PASSWORD = EMAIL_PASS
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# DEFAULT_FROM_EMAIL = 'daniel@dhayes.me'
+# EMAIL_HOST_USER = 'daniel@dhayes.me'
+# EMAIL_HOST_PASSWORD = EMAIL_PASS
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
 
 
 # Database

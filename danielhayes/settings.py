@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -33,6 +33,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if not DEBUG:
     ALLOWED_HOSTS = ['.dhayes.me', '104.207.140.153']
 
+if DEBUG:
+    INTERNAL_IPS = ['127.0.0.1', ]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,9 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'autofixture',
     'tinymce',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,7 +67,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'danielhayes.urls'
 
-#LOGIN_REDIRECT_URL = 'home:home'
 
 TEMPLATES = [
     {
@@ -88,13 +92,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# DEFAULT_FROM_EMAIL = 'daniel@dhayes.me'
-# EMAIL_HOST_USER = 'daniel@dhayes.me'
-# EMAIL_HOST_PASSWORD = EMAIL_PASS
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
+MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
+MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
+
+EMAIL_BACKEND = 'utils.mailgun_backend.MailgunBackend'
+
 
 
 # Database
@@ -158,3 +160,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DISQUS_WEBSITE_SHORTNAME = 'dhayes'
+
+# TINY_MCE_ROOT = os.path.join(MEDIA_URL, 'tiny_mce')
+
+# TINYMCE_JS_URL = os.path.join(MEDIA_URL, 'tiny_mce/tiny_mce_src.js')
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+}

@@ -1,10 +1,9 @@
 from django.contrib import admin
+from django.db import models
+from tinymce.widgets import TinyMCE
 
 from .models import Post, PostImage, Tag
 
-from tinymce.widgets import TinyMCE
-
-from django.db import models
 
 class ImageInline(admin.TabularInline):
     model = PostImage
@@ -13,12 +12,13 @@ class ImageInline(admin.TabularInline):
         ('Post Images',     {'fields': ['image_title', 'image']})
     ]
 
-# Register your models here.
+
 class PostAdmin(admin.ModelAdmin):
-    #used for organizing the admin editing interface
+    # used for organizing the admin editing interface
     fieldsets = [
-        (None,               {'fields': ['title', 'author', 'slug', 'tags', 'post']}),
-        ('Date information', {'fields': ['pub_date',]}),
+        (None, {'fields': [
+            'title', 'author', 'slug', 'tags', 'post']}),
+        ('Date information', {'fields': ['pub_date', ]}),
     ]
     inlines = [ImageInline]
     # what to display in thelist of Post objects
@@ -29,8 +29,9 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
     formfield_overrides = {
-        models.TextField: {'widget': TinyMCE}
+        models.TextField: {'widget': TinyMCE(attrs={'cols': 160, 'rows': 90})}
     }
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Tag)

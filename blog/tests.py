@@ -1,18 +1,22 @@
-from .models import Post
+import datetime
+import random
+import string
+
+from django.contrib.auth.models import User
+from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-import datetime
-from django.test import TestCase
-from django.contrib.auth.models import User
-import random
+
+from .models import Post
 
 
-def create_post(user, post_text, days):
+def create_post(user, post_title, post_text, days):
     """
     Create a question with the given 'post_text' and published the given number
     of 'days' offset to now (negative for posts published in the past, positive
     for posts that have yet to be published.
     :param user: user who created the post
+    :param post_title: title of created post
     :param post_text: text of created post
     :param days: number of days offset from now
     :return: post with options
@@ -20,8 +24,8 @@ def create_post(user, post_text, days):
 
     time = timezone.now() + datetime.timedelta(days=days)
     slug = random.randint(1, 1000000)
-    return Post.objects.create(author=user, title=post_text,
-                               slug=slug, pub_date=time)
+    return Post.objects.create(author=user, title=post_title,
+                               slug=slug, post=post_text, pub_date=time)
 
 
 class PostIndexViewTests(TestCase):
@@ -48,8 +52,9 @@ class PostIndexViewTests(TestCase):
         Posts with a pub_date in the past are displayed on the index page.
         :return:
         """
-
-        create_post(user=self.user, post_text="Past post.", days=-30)
+        post_text = ''.join([random.choice(string.ascii_letters + ' ') for _ in range(50)])
+        post_title = post_text[:10]
+        create_post(self.user, post_title, post_text, -30)
         response = self.client.get(reverse('blog:index'))
         self.assertQuerysetEqual(
             response.context['posts'], ['<Post: Past post.>']
@@ -61,7 +66,9 @@ class PostIndexViewTests(TestCase):
         page.
         :return:
         """
-        create_post(user=self.user, post_text="Future post.", days=30)
+        post_text = ''.join([random.choice(string.ascii_letters + ' ') for _ in range(50)])
+        post_title = post_text[:10]
+        create_post(self.user, post_title, post_text, 30)
         response = self.client.get(reverse('blog:index'))
         self.assertContains(response, "No posts are available.")
         self.assertQuerysetEqual(response.context['posts'], [])
@@ -72,8 +79,12 @@ class PostIndexViewTests(TestCase):
         displayed.
         :return:
         """
-        create_post(user=self.user, post_text="Past post.", days=-30)
-        create_post(user=self.user, post_text="Future post.", days=30)
+        post1 = ''.join([random.choice(string.ascii_letters + ' ') for _ in range(50)])
+        post2 = ''.join([random.choice(string.ascii_letters + ' ') for _ in range(50)])
+        title1 = post1[:10]
+        title2 = post2[:10]
+        create_post(self.user, title1, post1, -30)
+        create_post(self.user, title2, post1, 30)
         response = self.client.get(reverse('blog:index'))
         self.assertQuerysetEqual(
             response.context['posts'], ['<Post: Past post.>'])
@@ -83,8 +94,12 @@ class PostIndexViewTests(TestCase):
         The blog index page may display multiple posts
         :return:
         """
-        create_post(user=self.user, post_text="Past post 1.", days=-30)
-        create_post(user=self.user, post_text="Past post 2.", days=-5)
+        post1 = ''.join([random.choice(string.ascii_letters + ' ') for _ in range(50)])
+        post2 = ''.join([random.choice(string.ascii_letters + ' ') for _ in range(50)])
+        title1 = post1[:10]
+        title2 = post2[:10]
+        create_post(self.user, title1, post1, -30)
+        create_post(self.user, title2, post2, -5)
         response = self.client.get(reverse('blog:index'))
         self.assertQuerysetEqual(
             response.context['posts'],

@@ -6,7 +6,6 @@ from django.conf import settings
 from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
 
-
 class MailgunBackend(BaseEmailBackend):
     """
     A wrapper that manages mailgun API
@@ -50,7 +49,7 @@ class MailgunBackend(BaseEmailBackend):
                       "text": body,
                       "h:Reply-To": reply_to}
             )
-        except:
+        except Exception:
             if not self.fail_silently:
                 raise
             return False

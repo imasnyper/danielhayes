@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -29,9 +29,9 @@ with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dhayes.me', 'www.dhayes.me']
 if not DEBUG:
-    ALLOWED_HOSTS = ['.dhayes.me', '104.207.140.153']
+    ALLOWED_HOSTS = ['www.dhayes.me', 'dhayes.me', '104.207.140.153']
 
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]

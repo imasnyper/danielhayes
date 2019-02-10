@@ -38,6 +38,9 @@ Django = "*"
 Pillow = "==4.0.0"
 requests = "*"
 django-debug-toolbar = "*"
+gunicorn = "*"
+werkzeug = "*"
+ipdb = "*"
 
 [requires]
 python_version = "3.7"

@@ -31,14 +31,15 @@ def index(request):
             content = template.render(context)
 
             with mail.get_connection() as connection:
-                mail.EmailMessage(
+                email = mail.EmailMessage(
                     f"New Contact Form Submission from {contact_email}",
                     content,
                     'do-not-reply@mg.dhayes.me',
                     ['daniel@dhayes.me', ],
                     reply_to=[contact_email, ],
                     connection=connection
-                ).send()
+                )
+                email.send()
 
             return redirect('home:home')
 

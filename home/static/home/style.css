@@ -9,7 +9,12 @@ body {
     flex-direction: column;
 }
 
-#id_contact_name, #id_contact_email, #id_message {
+form > button {
+    background-color: #22516d;
+    color: snow;
+}
+
+#id_contact_name, #id_contact_email, #id_message, #id_subject {
     background-color: snow;
 }
 
@@ -30,8 +35,8 @@ body {
 
 .jumbotron {
     background-image: url('images/bg.png');
-    background-position-x: 0px;
-    background-position-y: 0px;
+    background-position-x: 0;
+    background-position-y: 0;
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;

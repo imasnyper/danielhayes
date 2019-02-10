@@ -19,6 +19,7 @@ def index(request):
         if form.is_valid():
             contact_name = request.POST.get('contact_name', "")
             contact_email = request.POST.get('contact_email', "")
+            subject = request.POST.get('subject', "")
             message = request.POST.get('message', "")
 
             template = get_template('home/contact_template.txt')
@@ -32,9 +33,9 @@ def index(request):
 
             with mail.get_connection() as connection:
                 email = mail.EmailMessage(
-                    f"New Contact Form Submission from {contact_email}",
+                    f"Contact Form Submission: {subject}",
                     content,
-                    'do-not-reply@mg.dhayes.me',
+                    'Contact Form <contact@mg.dhayes.me>',
                     ['daniel@dhayes.me', ],
                     reply_to=[contact_email, ],
                     connection=connection
@@ -57,6 +58,7 @@ def contact(request):
         if form.is_valid():
             contact_name = request.POST.get('contact_name', "")
             contact_email = request.POST.get('contact_email', "")
+            subject = request.POST.get('subject', "")
             message = request.POST.get('message', "")
 
             template = get_template('home/contact_template.txt')
@@ -70,9 +72,9 @@ def contact(request):
 
             with mail.get_connection() as connection:
                 mail.EmailMessage(
-                    f"New Contact Form Submission from {contact_email}",
+                    f"Contact Form Submission: {subject}",
                     content,
-                    'do-not-reply@mg.dhayes.me',
+                    'Contact Form <contact@mg.dhayes.me>',
                     ['daniel@dhayes.me', ],
                     reply_to=[contact_email, ],
                     connection=connection

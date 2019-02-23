@@ -22,7 +22,7 @@ a.post:hover {
 
 ul.no-style {
   list-style: none;
-  padding-left: 0px;
+    padding-left: 0;
 }
 
 .post-container {
@@ -247,4 +247,3 @@ a:active.tag-links {
     margin: 0;
     padding: 0;
 }
-

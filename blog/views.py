@@ -1,7 +1,7 @@
 import datetime
-from dateutil.relativedelta import relativedelta
 
 import pytz
+from dateutil.relativedelta import relativedelta
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
@@ -66,7 +66,7 @@ class IndexView(ListView):
             
         context['tags'] = sorted([x[0] for x in get_published_tags()], 
             key=lambda x: x.tag)
-            
+
         return context
         
         

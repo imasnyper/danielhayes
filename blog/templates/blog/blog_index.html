@@ -33,7 +33,7 @@
                         </h6>
                     {% endif %}
                     <p class="text-align post-index-content">
-                        {{ post.post|striptags|truncatewords:50 }}
+                        {{ post.post|safe|striptags|truncatewords:50 }}
                     </p>
                 </div>
             </a>

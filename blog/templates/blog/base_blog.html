@@ -72,7 +72,8 @@ active
             <a href="{% url 'blog:tags' %}"><h3>Tag Cloud</h3></a>
             {% for t in tags %}
                 <div class="tag" >
-                    <a style="font-size:{{ t.frequency|multiply:100}}px !important;" href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
+                    <a style="font-size:{{ t.frequency|multiply:50 }}px !important;"
+                       href="{% url 'blog:tags' t.tag %}">{{ t.tag }}</a>
                 </div>
             {% endfor %}
         {% else %}

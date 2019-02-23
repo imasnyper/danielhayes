@@ -35,12 +35,12 @@ six = "==1.11.0"
 uritemplate = "==3.0.0"
 whitenoise = "==3.3.0"
 Django = "*"
-Pillow = "==4.0.0"
 requests = "*"
 django-debug-toolbar = "*"
 gunicorn = "*"
 werkzeug = "*"
 ipdb = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"

@@ -3,55 +3,56 @@
 {% block title %}Blog | {{ post.title|title }}{% endblock title %}
 
 {% block page_header %}
-<div class="jumbotron">
-    <h1>{{ post.title|title }}</h1>
-    <h4>Written by {{ post.author|title }} on {{post.pub_date|date:"l, F j, Y" }}</h4>
-    {% if post.tags %}
-        <h4>Tags: 
-            {% for tag in post.tags.all %}
-                {% url 'blog:tags' tag as tag_url %}
-                {% if forloop.last %}
-                    <span><a class="tag-links" href="{{ tag_url }}">{{ tag|title }}</a></span>
-                {% else %}
-                    <span><a class="tag-links" href="{{ tag_url }}">{{ tag|title }},</a> </span>
-                {% endif %}
-            {% endfor %}
-        </h4>
-    {% endif %}
-</div>
+    <div class="jumbotron">
+        <h1>{{ post.title|title }}</h1>
+        <h4>Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}</h4>
+        {% if post.tags %}
+            <h4>Tags:
+                {% for tag in post.tags.all %}
+                    {% url 'blog:tags' tag as tag_url %}
+                    {% if forloop.last %}
+                        <span><a class="tag-links" href="{{ tag_url }}">{{ tag|title }}</a></span>
+                    {% else %}
+                        <span><a class="tag-links" href="{{ tag_url }}">{{ tag|title }},</a> </span>
+                    {% endif %}
+                {% endfor %}
+            </h4>
+        {% endif %}
+    </div>
 {% endblock page_header %}
 
 {% block post_detail %}
-<div class="post-content">
-    <div class="post-content-text">
-        {{ post.post|safe }}
-    </div>
+    <div class="post-content">
+        <div class="post-content-text">
+            {{ post.post|safe }}
+        </div>
 
-    {% if post.postimage_set %}
-        {% for img in post.postimage_set.all %}
-        <div class="thumbnail">
-            <a href="{{ img.image.url }}" target="_blank">
-                <img alt="{{ img.image_title|title }}" width="{{ img.image_width }}" height="{{ img.image_height }}"
-                     src="{{ img.image.url }}"/>
-                <div class="caption text-right">
-                    <p>{{ img.image_title|title }}</p>
+        {% if post.postimage_set %}
+            {% for img in post.postimage_set.all %}
+                <div class="thumbnail">
+                    <a href="{{ img.image.url }}" target="_blank">
+                        <img alt="{{ img.image_title|title }}" width="{{ img.image_width }}"
+                             height="{{ img.image_height }}"
+                             src="{{ img.image.url }}"/>
+                        <div class="caption text-right">
+                            <p>{{ img.image_title|title }}</p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        {% endif %}
 
-    {% if prev %}
-        <div class="prev-post">
-            <a href="{% url 'blog:detail' prev.slug %}">Previous Post</a>
-        </div>
-    {% endif %}
-    {% if next %}
-        <div class="next-post">
-            <a href="{% url 'blog:detail' next.slug %}">Next Post</a>
-        </div>
-    {% endif %}
-</div>
+        {% if prev %}
+            <div class="prev-post">
+                <a href="{% url 'blog:detail' prev.slug %}">Previous Post</a>
+            </div>
+        {% endif %}
+        {% if next %}
+            <div class="next-post">
+                <a href="{% url 'blog:detail' next.slug %}">Next Post</a>
+            </div>
+        {% endif %}
+    </div>
 {% endblock post_detail %}
 
 {% block post_list %}

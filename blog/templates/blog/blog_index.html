@@ -44,16 +44,16 @@
 {% endblock post_list %}
 
 {% block page_header %}
-<div class="jumbotron">
-    {% if tag %}
-        <h2>Posts tagged {{ tag }}</h2>
-    {% else %}
-        <h1>The Blog</h1>
-        <h3 class="jumbotron-subheading">
-            Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
-        </h3>
-    {% endif %}
-</div>
+    <div class="jumbotron">
+        {% if tag %}
+            <h2>Posts tagged {{ tag }}</h2>
+        {% else %}
+            <h1>The Blog</h1>
+            <h3 class="jumbotron-subheading">
+                Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
+            </h3>
+        {% endif %}
+    </div>
 {% endblock page_header %}
 
 {% block pag_prev_url %}

@@ -28,7 +28,6 @@ with open(os.path.join(BASE_DIR, 'danielhayes/secret_key.txt')) as f:
 with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
 
-
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dhayes.me', 'www.dhayes.me']
 if not DEBUG:
     ALLOWED_HOSTS = ['www.dhayes.me', 'dhayes.me', '104.207.140.153']
@@ -46,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'autofixture',
@@ -66,7 +67,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'danielhayes.urls'
-
 
 TEMPLATES = [
     {
@@ -92,12 +92,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
+SITE_ID = 2
+
 MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 
 EMAIL_BACKEND = 'utils.mailgun_backend.MailgunBackend'
-
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -112,7 +112,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -132,7 +131,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -145,7 +143,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

@@ -16,13 +16,42 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.contrib.sitemaps import GenericSitemap, Sitemap
+from django.contrib.sitemaps.views import sitemap
+from django.urls import path, include, reverse
+from django.utils import timezone
+
+from blog.models import Post
+
+info_dict = {
+    'queryset': Post.objects.filter(pub_date__lte=timezone.now()),
+    'date_field': 'pub_date',
+}
+
+
+class StaticViewSitemap(Sitemap):
+    priority = 0.75
+    changefreq = 'daily'
+
+    def items(self):
+        return ['home:home', 'home:contact']
+
+    def location(self, item):
+        return reverse(item)
+
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'blog': GenericSitemap(info_dict, priority=1.0),
+}
 
 urlpatterns = [
     path('', include('home.urls')),
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 if settings.DEBUG:

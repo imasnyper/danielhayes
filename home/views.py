@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core import mail
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -11,41 +12,48 @@ from .models import Blurb
 def index(request):
     blurbs = Blurb.objects.order_by("order_num")
     blurbs = [blurbs[i:i+3] for i in range(0, len(blurbs), 3)]
-    form_class = ContactForm
+    form = ContactForm()
 
     if request.method == 'POST':
-        form = form_class(data=request.POST)
+        form = ContactForm(data=request.POST)
+
+        contact_name = request.POST.get('contact_name', "")
+        contact_email = request.POST.get('contact_email', "")
+        subject = request.POST.get('subject', "")
+        message = request.POST.get('message', "")
 
         if form.is_valid():
-            contact_name = request.POST.get('contact_name', "")
-            contact_email = request.POST.get('contact_email', "")
-            subject = request.POST.get('subject', "")
-            message = request.POST.get('message', "")
+            email_template = get_template('home/contact_template.txt')
 
-            template = get_template('home/contact_template.txt')
-
-            context = {
+            email_context = {
                 'contact_name': contact_name,
                 'contact_email': contact_email,
                 'form_message': message,
             }
-            content = template.render(context)
+            email_content = email_template.render(email_context)
 
             with mail.get_connection() as connection:
                 email = mail.EmailMessage(
                     f"Contact Form Submission: {subject}",
-                    content,
+                    email_content,
                     'Contact Form <contact@mg.dhayes.me>',
                     ['daniel@dhayes.me', ],
                     reply_to=[contact_email, ],
                     connection=connection
                 )
-                email.send()
+                sent = email.send()
+                if sent == 1:
+                    messages.info(request, "Thank you, the email was sent.")
+                else:
+                    messages.error(request,
+                                   "There seems to have been a problem sending the email. Please try again later.")
 
             return redirect('home:home')
+        else:
+            form = ContactForm(data=request.POST)
 
     context = {'blurbs': blurbs,
-               'form': form_class}
+               'form': form}
     return render(request, 'home/index.html', context)
 
 

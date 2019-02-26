@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'autofixture',
     'tinymce',
+    'captcha',
     'debug_toolbar',
 ]
 
@@ -98,6 +99,9 @@ MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 
 EMAIL_BACKEND = 'utils.mailgun_backend.MailgunBackend'
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

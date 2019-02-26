@@ -1,3 +1,5 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV3
 from django import forms
 
 
@@ -9,9 +11,11 @@ class ContactForm(forms.Form):
         required=True,
         widget=forms.Textarea
     )
+    captcha = ReCaptchaField(widget=ReCaptchaV3)
     
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields['contact_name'].label = "Your name:"
         self.fields['contact_email'].label = "Your email"
         self.fields['message'].label = "What can I help you with?"
+        self.fields['captcha'].label = ""

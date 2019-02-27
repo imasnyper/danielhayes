@@ -92,7 +92,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
-SITE_ID = 2
+SITE_ID = 1
 
 MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")

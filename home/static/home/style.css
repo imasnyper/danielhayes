@@ -11,11 +11,11 @@ body {
 
 form > button {
     background-color: #22516d;
-    color: snow;
+    color: white;
 }
 
 #id_contact_name, #id_contact_email, #id_message, #id_subject {
-    background-color: snow;
+    background-color: white;
 }
 
 @media (max-width: 320px) {
@@ -84,7 +84,7 @@ form > button {
 
 .content {
     padding: 50px 0 30px;
-    background-color: snow;
+    background-color: white;
     font-family: 'Share Tech Mono', monospace;
     flex: 1 0 auto; /* for sticky footer */
     margin: 0;

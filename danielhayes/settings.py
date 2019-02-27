@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -93,7 +93,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
-SITE_ID = 2
+SITE_ID = 1
 
 MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")

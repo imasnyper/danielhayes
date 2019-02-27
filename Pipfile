@@ -41,6 +41,7 @@ gunicorn = "*"
 werkzeug = "*"
 ipdb = "*"
 pillow = "*"
+django-recaptcha = "*"
 
 [requires]
 python_version = "3.7"

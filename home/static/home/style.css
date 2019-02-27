@@ -27,11 +27,25 @@ form > button {
 
 /* Home Styling  */
 
-.color-primary-0 { color: #22516D }
-.color-primary-1 { color: #BBCFDC } 
-.color-primary-2 { color: #527D96 }
-.color-primary-3 { color: #042C43 }
-.color-primary-4 { color: #000C12 }
+.color-primary-0 {
+    color: #22516D
+}
+
+.color-primary-1 {
+    color: #BBCFDC
+}
+
+.color-primary-2 {
+    color: #527D96
+}
+
+.color-primary-3 {
+    color: #042C43
+}
+
+.color-primary-4 {
+    color: #000C12
+}
 
 .jumbotron {
     background-image: url('images/bg.png');
@@ -51,16 +65,16 @@ form > button {
 }
 
 @media (max-width: 500px) {
-  .jumbotron {
-    background-image: url('images/bg-2.png');
-    background-size: 200%;
-  }
+    .jumbotron {
+        background-image: url('images/bg-2.png');
+        background-size: 200%;
+    }
 }
 
 @media (max-width: 768px) {
-  .jumbotron {
-    background-size: 200%
-  }
+    .jumbotron {
+        background-size: 200%
+    }
 }
 
 .home-container {
@@ -82,7 +96,7 @@ form > button {
 }
 
 .row {
-	margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
+    margin: 0; /*fixes horizontal scroll bar showing up for now reason*/
 }
 
 label {
@@ -100,4 +114,8 @@ label {
     background-color: #22516d;
     color: #bbcfdc;
     text-align: right;
+}
+
+.grecaptcha-badge {
+    bottom: 74px !important;
 }

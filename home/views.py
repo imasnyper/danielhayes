@@ -36,8 +36,8 @@ def index(request):
                 email = mail.EmailMessage(
                     f"Contact Form Submission: {subject}",
                     email_content,
-                    'Contact Form <contact@mg.dhayes.me>',
-                    ['daniel@dhayes.me', ],
+                    'Contact Form <contact@mg.danhayes.dev>',
+                    ['dan@danhayes.dev', ],
                     reply_to=[contact_email, ],
                     connection=connection
                 )
@@ -82,8 +82,8 @@ def contact(request):
                 mail.EmailMessage(
                     f"Contact Form Submission: {subject}",
                     content,
-                    'Contact Form <contact@mg.dhayes.me>',
-                    ['daniel@dhayes.me', ],
+                    'Contact Form <contact@mg.danhayes.dev>',
+                    ['daniel@danhayes.dev', ],
                     reply_to=[contact_email, ],
                     connection=connection
                 ).send()

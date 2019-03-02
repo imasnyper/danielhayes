@@ -28,9 +28,9 @@ with open(os.path.join(BASE_DIR, 'danielhayes/secret_key.txt')) as f:
 with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dhayes.me', 'www.dhayes.me']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'danhayes.dev', 'www.danhayes.dev']
 if not DEBUG:
-    ALLOWED_HOSTS = ['www.dhayes.me', 'dhayes.me', '104.207.140.153']
+    ALLOWED_HOSTS = ['www.danhayes.dev', 'danhayes.dev', '149.248.57.118']
 
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
 SITE_ID = 1
 
-MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
+MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.danhayes.dev/messages'
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 
 EMAIL_BACKEND = 'utils.mailgun_backend.MailgunBackend'

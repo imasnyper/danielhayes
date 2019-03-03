@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -30,7 +30,7 @@ with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'danhayes.dev', 'www.danhayes.dev']
 if not DEBUG:
-    ALLOWED_HOSTS = ['danhayes.dev', 'www.danhayes.dev', '149.248.57.118']
+    ALLOWED_HOSTS = ['www.danhayes.dev', 'danhayes.dev', '149.248.57.118']
 
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'danielhayes.wsgi.application'
 
 SITE_ID = 1
 
-MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.dhayes.me/messages'
+MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.danhayes.dev/messages'
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 
 EMAIL_BACKEND = 'utils.mailgun_backend.MailgunBackend'

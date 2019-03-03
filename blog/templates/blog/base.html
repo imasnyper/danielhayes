@@ -32,14 +32,18 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135497689-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-135497689-1');
     </script>
 
 
-    <script src="{% static 'home/script.js' %}"></script>
+    <script src="{% static 'blog/script.js' %}"></script>
 
     {% block extra_stylesheets %}{% endblock extra_stylesheets %}
 

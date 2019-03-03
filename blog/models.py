@@ -15,6 +15,7 @@ class Tag(models.Model):
     alphanumeric = RegexValidator(
         r'[0-9a-zA-Z]*$', 'Only alphanumeric characters will be allowed')
     tag = models.CharField(max_length=25, validators=[alphanumeric])
+    slug = models.SlugField(unique=True)
 
     def tag_post_count(self):
         return len(self.post_set.filter(pub_date__lte=timezone.now()))
@@ -29,7 +30,7 @@ class Tag(models.Model):
 
     def save(self, *args, **kwargs):
         Tag.full_clean(self)
-        super(Tag, self).save(self, *args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.tag

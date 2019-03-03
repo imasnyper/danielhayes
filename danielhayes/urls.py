@@ -34,7 +34,7 @@ class StaticViewSitemap(Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return ['home:home', 'home:contact']
+        return ['home:contact']
 
     def location(self, item):
         return reverse(item)
@@ -46,9 +46,9 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('', include('home.urls')),
-    path('blog/', include('blog.urls')),
+    # path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

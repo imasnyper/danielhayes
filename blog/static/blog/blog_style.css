@@ -4,24 +4,24 @@
     padding: 0 7%;
 }
 
-img{
-  display: block;
-  max-width: 100%;
-  width: auto;
-  height: auto;
+img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
 }
 
 a.post {
-  display: block;
+    display: block;
 }
 
 a.post:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 
 ul.no-style {
-  list-style: none;
+    list-style: none;
     padding-left: 0;
 }
 
@@ -30,37 +30,41 @@ ul.no-style {
 }
 
 .post-title {
-  color: black;
+    color: black;
 }
 
 .post-content {
-  max-width: 600px; /*keep paragraph a readable width*/
-  margin: 0 auto; /*center horizontally*/
+    max-width: 600px; /*keep paragraph a readable width*/
+    margin: 0 auto; /*center horizontally*/
 }
 
 .post-content-text {
-  text-align: justify;
-  text-justify: inter-word;
-  padding-bottom: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-bottom: 20px;
 }
 
 .post-author {
-  color: black;
+    color: black;
 }
 
 .post-index-content {
-  color: black;
+    color: black;
 }
 
 .post-card {
-  background-color: #eee;
-  margin: 0 0 45px 0;
-  padding: 30px 30px;
-  border: 1px solid #F9F9F9;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),
-              0 4px 5px 0 rgba(0,0,0,0.06),
-              0 1px 10px 0 rgba(0,0,0,0.08);
-  color: black;
+    background-color: white;
+    margin: 0 0 45px 0;
+    padding: 30px 30px;
+    border: 2px solid black;
+    color: black;
+    transition: background-color .75s;
+    -moz-transition: background-color .75s;
+    -webkit-transition: background-color .75s;
+}
+
+.post-card:hover {
+    background-color: rgba(34, 81, 109, .35);
 }
 
 .archive-title {
@@ -119,8 +123,8 @@ a:active.tag-links {
     text-decoration: none;
 }
 
-.archive-count{
-  float: right;
+.archive-count {
+    float: right;
 }
 
 .prev-post {
@@ -188,7 +192,7 @@ a:active.tag-links {
 }
 
 /* When you mouse over the navigation links, change their color */
-.archive-nav a:hover, .offcanvas a:focus{
+.archive-nav a:hover, .offcanvas a:focus {
     color: silver;
 }
 
@@ -201,7 +205,6 @@ a:active.tag-links {
     margin: 0;
     padding: 0;
 }
-
 
 
 /* The side navigation menu */
@@ -222,7 +225,7 @@ a:active.tag-links {
 .tag-nav a {
     padding: 8px 8px 8px 64px;
     text-decoration: none;
-/*     font-size: 24px; */
+    /*     font-size: 24px; */
     color: #818181;
     display: block;
     transition: 0.3s
@@ -234,7 +237,7 @@ a:active.tag-links {
 }
 
 /* When you mouse over the navigation links, change their color */
-.tag-nav a:hover, .offcanvas a:focus{
+.tag-nav a:hover, .offcanvas a:focus {
     color: silver;
 }
 

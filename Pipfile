@@ -42,6 +42,8 @@ werkzeug = "*"
 ipdb = "*"
 pillow = "*"
 django-recaptcha = "*"
+lorem = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"

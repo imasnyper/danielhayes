@@ -2,17 +2,27 @@
 {% extends 'blog/base_blog.html' %}
 {% load blog_extras %}
 
+{% block page_header %}
+    <div class="jumbotron">
+        {% if tag %}
+            <h2>Posts Tagged {{ tag|title }}</h2>
+        {% else %}
+            <h1>The Blog</h1>
+            <h3 class="jumbotron-subheading">
+                Where I discuss Django Web Development, Python Programming, and System Administration.
+            </h3>
+        {% endif %}
+    </div>
+{% endblock page_header %}
+
 {% block post_list %}
     {% if posts %}
         {% for post in posts %}
             <a class="post" href="{% url 'blog:detail' post.slug %}">
                 <div class="post-card">
                     <h3 class="post-title">
-                        {{ post.title }}
+                        {{ post.title|title }}
                     </h3>
-                    <!--                <h5 class="post-author">
-                    Written by {{ post.author|title }} on {{ post.pub_date|date:"l, F j, Y" }}
-                </h5>-->
                     <h5 class="post-author">
                         Published on {{ post.pub_date|date:"l, F j, Y" }}
                     </h5>
@@ -22,12 +32,12 @@
                             {% for tag in post.tags.all %}
                                 {% if forloop.last %}
                                     <span>
-                                    {{ tag }}
-                                </span>
+                                        {{ tag.tag|title }}
+                                    </span>
                                 {% else %}
                                     <span>
-                                    {{ tag }},
-                                </span>
+                                        {{ tag.tag|title }},
+                                    </span>
                                 {% endif %}
                             {% endfor %}
                         </h6>
@@ -43,42 +53,30 @@
     {% endif %}
 {% endblock post_list %}
 
-{% block page_header %}
-    <div class="jumbotron">
-        {% if tag %}
-            <h2>Posts tagged {{ tag }}</h2>
-        {% else %}
-            <h1>The Blog</h1>
-            <h3 class="jumbotron-subheading">
-                Where I discuss Django web-dev, python programming, and probably some random Blue Jays babble.
-            </h3>
-        {% endif %}
-    </div>
-{% endblock page_header %}
 
 {% block pag_prev_url %}
     <!--used to prevent a reverse url error during template rendering-->
-    {% url 'blog:tags' tag as pag_prev_url %}
+    {% url 'blog:tags' tag.slug as pag_prev_url %}
     {% if pag_prev_url %}
         {{ pag_prev_url }}?page={{ page_obj.previous_page_number }}
     {% else %}
         <!--still have to put this here to make links work again for non-tag indexes-->
-        {% url 'blog:index' %}?page={{ page_obj.previous_page_number }}
+        {% url 'blog:home' %}?page={{ page_obj.previous_page_number }}
     {% endif %}
 {% endblock %}
 {% block pag_step_url %}
-    {% url 'blog:tags' tag as pag_step_url %}
+    {% url 'blog:tags' tag.slug as pag_step_url %}
     {% if pag_step_url %}
         {{ pag_step_url }}?page={{ page }}
     {% else %}
-        {% url 'blog:index' %}?page={{ page }}
+        {% url 'blog:home' %}?page={{ page }}
     {% endif %}
 {% endblock %}
 {% block pag_next_url %}
-    {% url 'blog:tags' tag as pag_next_url %}
+    {% url 'blog:tags' tag.slug as pag_next_url %}
     {% if pag_next_url %}
         {{ pag_next_url }}?page={{ page_obj.next_page_number }}
     {% else %}
-        {% url 'blog:index' %}?page={{ page_obj.next_page_number }}
+        {% url 'blog:home' %}?page={{ page_obj.next_page_number }}
     {% endif %}
 {% endblock %}

@@ -4,20 +4,23 @@
 <html lang="en">
 <head>
     <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
-    <meta name="google-site-verification" content="7eSuk6-vGx2nsBy1ymFlYzPQsT6s6iEzJ3vCKX48VaU" />
+    <meta name="google-site-verification" content="7eSuk6-vGx2nsBy1ymFlYzPQsT6s6iEzJ3vCKX48VaU"/>
 
     <link rel="stylesheet" type="text/css"
-          href="{% static 'home/style.css' %}"/>
+          href="{% static 'blog/style.css' %}"/>
 
     <link rel="stylesheet" type="text/css"
-          href="{% static 'home/navbar_style.css' %}"/>
+          href="{% static 'blog/navbar_style.css' %}"/>
 
     <link href="https://fonts.googleapis.com/css?family=Coda|Lato:300" rel="stylesheet">
 
@@ -45,7 +48,8 @@
 
     <title>{% block title %}Daniel Hayes - Python and Django Blogger{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="From pure python scripts, to full fledged Django applications; Discover the world of Python through the eyes of Daniel Hayes!">
+    <meta name="description"
+          content="From pure python scripts, to full fledged Django applications; Discover the world of Python through the eyes of Daniel Hayes!">
 </head>
 <body>
 <nav class="container-fluid navbar navbar-default navbar-fixed-top">
@@ -56,7 +60,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'home:home' %}">
+            <a class="navbar-brand" href="{% url 'blog:home' %}">
                 {% block nav-brand %}
                     DH
                 {% endblock %}
@@ -65,22 +69,25 @@
         <div class="collapse navbar-collapse" id="MyNavbar">
             <ul class="nav navbar-nav">
                 <li class="{% block blog_active %}{% endblock %}">
-                    <a href="{% url 'blog:index' %}">Blog</a>
+                    <a href="{% url 'blog:home' %}">Blog</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="github-link">
                     <div class="github-follow">
-                        <a class="github-button" href="https://github.com/imasnyper" aria-label="Follow @imasnyper on GitHub">Follow</a>
+                        <a class="github-button" href="https://github.com/imasnyper"
+                           aria-label="Follow @imasnyper on GitHub">Follow</a>
                     </div>
                 </li>
                 <li class="twitter-link">
                     <div class="twitter-follow">
-                        <a href="https://twitter.com/imasnyper" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @imasnyper</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/imasnyper" class="twitter-follow-button"
+                           data-show-screen-name="false" data-show-count="false">Follow @imasnyper</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                 </li>
                 <li class="{% block contact_active %}{% endblock %}">
-                    <a href="{% url 'home:contact' %}">Contact</a>
+                    <a href="{% url 'blog:contact' %}">Contact</a>
                 </li>
             </ul>
         </div>

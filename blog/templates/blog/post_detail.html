@@ -9,11 +9,11 @@
         {% if post.tags %}
             <h4>Tags:
                 {% for tag in post.tags.all %}
-                    {% url 'blog:tags' tag as tag_url %}
+                    {% url 'blog:tags' tag.slug as tag_url %}
                     {% if forloop.last %}
-                        <span><a class="tag-links" href="{{ tag_url }}">{{ tag|title }}</a></span>
+                        <span><a class="tag-links" href="{{ tag_url }}">{{ tag.tag|title }}</a></span>
                     {% else %}
-                        <span><a class="tag-links" href="{{ tag_url }}">{{ tag|title }},</a> </span>
+                        <span><a class="tag-links" href="{{ tag_url }}">{{ tag.tag|title }},</a> </span>
                     {% endif %}
                 {% endfor %}
             </h4>

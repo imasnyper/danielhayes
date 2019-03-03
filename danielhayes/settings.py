@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -28,9 +28,9 @@ with open(os.path.join(BASE_DIR, 'danielhayes/secret_key.txt')) as f:
 with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dhayes.me', 'www.dhayes.me']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'danhayes.dev', 'www.danhayes.dev']
 if not DEBUG:
-    ALLOWED_HOSTS = ['www.dhayes.me', 'dhayes.me', '104.207.140.153']
+    ALLOWED_HOSTS = ['danhayes.dev', 'www.danhayes.dev', '149.248.57.118']
 
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
@@ -38,8 +38,7 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
-    'home.apps.HomeConfig',
+    'blog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,10 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'autofixture',
     'tinymce',
     'captcha',
     'debug_toolbar',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

@@ -2,12 +2,16 @@ import datetime
 
 import pytz
 from dateutil.relativedelta import relativedelta
+from django.core import mail
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
+from django.shortcuts import render, redirect
+from django.template.loader import get_template
 from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
+from .forms import ContactForm
 from .models import Post, Tag
 
 
@@ -32,25 +36,27 @@ def archive():
     a = a.order_by('month')
 
     return a
-    
+
+
 def get_published_tags():
     published_tags = []
     published_posts = Post.objects.filter(pub_date__lte=timezone.now())
     for post in published_posts:
         for tag in post.tags.all():
             published_tags.append((tag, tag.frequency()))
-       
+
     # remove duplicate tags from list
     published_tags = list(set(published_tags))
-    
+
     # nice one-liner for sorting the list by the related_post_count, which
     # is the second item in the published_tags tuple. key=lambda x: x[1]
     # tells sort to do this. it then makes a new list of just the first
     # element (the tag object) of the tuple in descending order.
     published_tags = [x for x in sorted(
         published_tags, key=lambda x: x[1], reverse=True)]
-    
+
     return published_tags
+
 
 class IndexView(ListView):
     template_name = "blog/blog_index.html"
@@ -62,26 +68,25 @@ class IndexView(ListView):
 
         context['archive'] = archive()
         if 'tag' in self.kwargs.keys():
-            context['tag'] = Tag.objects.get(tag=self.kwargs['tag'])
-            
-        context['tags'] = sorted([x[0] for x in get_published_tags()], 
-            key=lambda x: x.tag)
+            context['tag'] = Tag.objects.get(slug=self.kwargs['tag'])
+
+        context['tags'] = sorted([x[0] for x in get_published_tags()],
+                                 key=lambda x: x.tag)
 
         return context
-        
-        
+
     def get_queryset(self, **kwargs):
         self.queryset = []
-        
+
         if 'tag' in self.kwargs.keys():
-            tag_object = Tag.objects.get(tag=self.kwargs['tag'])
+            tag_object = Tag.objects.get(slug=self.kwargs['tag'])
             self.queryset = tag_object.post_set.all().filter(
                 pub_date__lte=timezone.now())
             self.queryset = self.queryset.order_by('pub_date')
         else:
             self.queryset = Post.objects.filter(pub_date__lte=timezone.now())
             self.queryset = self.queryset.order_by('-pub_date')
-            
+
         return self.queryset
 
 
@@ -112,10 +117,10 @@ class ArchiveView(ListView):
     # case the month_name and year variables.
     def get_context_data(self, **kwargs):
         context = super(ArchiveView, self).get_context_data(**kwargs)
-    
+
         context['archive'] = archive()
-        context['tags'] = sorted([x[0] for x in get_published_tags()], 
-            key=lambda x: x.tag)
+        context['tags'] = sorted([x[0] for x in get_published_tags()],
+                                 key=lambda x: x.tag)
         if 'month' in self.kwargs.keys():
             context.update(
                 year=self.kwargs['year'], month=self.kwargs['month'])
@@ -178,29 +183,63 @@ class PostDetailView(DetailView):
             PostDetailView, self).get_context_data(**kwargs)
 
         context['prev'], \
-            context['next'] = self.find_adjacent_posts(
-                context['post'])
+        context['next'] = self.find_adjacent_posts(
+            context['post'])
 
         context['archive'] = archive()
-        context['tags'] = sorted([x[0] for x in get_published_tags()], 
-            key=lambda x: x.tag)
+        context['tags'] = sorted([x[0] for x in get_published_tags()],
+                                 key=lambda x: x.tag)
 
         return context
 
 
-class BlogTagView(ListView):   
+class BlogTagView(ListView):
     template_name = "blog/blog_tags.html"
     context_object_name = 'tags'
 
     def get_context_data(self, **kwargs):
         context = super(BlogTagView, self).get_context_data(**kwargs)
         context['archive'] = archive()
-            
+
         return context
-        
+
     def get_queryset(self, **kwargs):
-        return sorted([x[0] for x in get_published_tags()], 
-            key=lambda x: x.tag)
-            
-            
-        
+        return sorted([x[0] for x in get_published_tags()],
+                      key=lambda x: x.tag)
+
+
+def contact(request):
+    form_class = ContactForm
+
+    if request.method == 'POST':
+        form = form_class(data=request.POST)
+
+        if form.is_valid():
+            contact_name = request.POST.get('contact_name', "")
+            contact_email = request.POST.get('contact_email', "")
+            subject = request.POST.get('subject', "")
+            message = request.POST.get('message', "")
+
+            template = get_template('blog/contact_template.txt')
+
+            context = {
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'form_message': message,
+            }
+            content = template.render(context)
+
+            with mail.get_connection() as connection:
+                mail.EmailMessage(
+                    f"Contact Form Submission: {subject}",
+                    content,
+                    'Contact Form <contact@mg.dhayes.me>',
+                    ['daniel@dhayes.me', ],
+                    reply_to=[contact_email, ],
+                    connection=connection
+                ).send()
+
+            return redirect('home:home')
+
+    context = {'form': form_class}
+    return render(request, 'blog/contact.html', context)

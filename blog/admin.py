@@ -9,7 +9,7 @@ class ImageInline(admin.TabularInline):
     model = PostImage
     extra = 1
     fieldsets = [
-        ('Post Images',     {'fields': ['image_title', 'image']})
+        ('Post Images', {'fields': ['image_title', 'image']})
     ]
 
 
@@ -29,9 +29,13 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
     formfield_overrides = {
-        models.TextField: {'widget': TinyMCE(attrs={'cols': 160, 'rows': 90})}
+        models.TextField: {'widget': TinyMCE(attrs={'cols': 120, 'rows': 45})}
     }
 
 
+class TagAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('tag',)}
+
+
 admin.site.register(Post, PostAdmin)
-admin.site.register(Tag)
+admin.site.register(Tag, TagAdmin)

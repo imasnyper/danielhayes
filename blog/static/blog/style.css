@@ -48,10 +48,10 @@ form > button {
 }
 
 .jumbotron {
-    background-image: url('images/bg.png');
+    background-image: url('images/bg_new.png');
     background-position-x: 0;
     background-position-y: 0;
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: silver;
@@ -66,16 +66,15 @@ form > button {
 
 @media (max-width: 500px) {
     .jumbotron {
-        background-image: url('images/bg-2.png');
-        background-size: 200%;
+        background-image: url('images/bg_new2.png');
     }
 }
 
-@media (max-width: 768px) {
-    .jumbotron {
-        background-size: 200%
-    }
-}
+/*@media (max-width: 768px) {*/
+/*.jumbotron {*/
+/*background-size: 200%*/
+/*}*/
+/*}*/
 
 .home-container {
     padding: 0 7%;

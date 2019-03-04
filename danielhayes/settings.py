@@ -27,6 +27,8 @@ with open(os.path.join(BASE_DIR, 'danielhayes/secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
 with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
     DB_PASS = f.read().strip()
+with open(os.path.join(BASE_DIR, 'danielhayes/disqus_key.txt')) as f:
+    DISQUS_API_KEY = f.read().strip()
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'danhayes.dev', 'www.danhayes.dev']
 if not DEBUG:
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     'captcha',
     'debug_toolbar',
     'django_extensions',
+    'disqus',
 ]
 
 MIDDLEWARE = [
@@ -159,7 +162,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DISQUS_WEBSITE_SHORTNAME = 'dhayes'
+DISQUS_WEBSITE_SHORTNAME = 'danhayes'
 
 # TINY_MCE_ROOT = os.path.join(MEDIA_URL, 'tiny_mce')
 

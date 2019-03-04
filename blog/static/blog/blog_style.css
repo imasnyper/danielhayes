@@ -127,6 +127,11 @@ a:active.tag-links {
     float: right;
 }
 
+.next-post, .prev-post {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 .prev-post {
     float: right;
 }

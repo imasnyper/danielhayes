@@ -76,6 +76,10 @@ form > button {
 /*}*/
 /*}*/
 
+.navbar-brand-full {
+    display: none;
+}
+
 .home-container {
     padding: 0 7%;
     margin: 0;

@@ -93,28 +93,6 @@
   }
 }
 
-.github-link {
-  height: 50px;
-}
-
-.twitter-link {
-    height: 50px;
-}
-
-.twitter-follow {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 15px;
-}
-
-.github-follow {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 15px;
-}
-
 .navbar-toggle {
   line-height: 75px;
   height: 30px;

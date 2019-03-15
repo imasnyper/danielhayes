@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -42,9 +42,6 @@
         gtag('config', 'UA-135497689-1');
     </script>
 
-
-    <script src="{% static 'blog/script.js' %}"></script>
-
     {% block extra_stylesheets %}{% endblock extra_stylesheets %}
 
     <title>{% block title %}Daniel Hayes - Python and Django Blogger{% endblock title %}</title>
@@ -63,8 +60,7 @@
             </button>
             <a class="navbar-brand" href="{% url 'blog:home' %}">
                 {% block nav-brand %}
-                    <span class="navbar-brand-short">DH</span>
-                    <span class="navbar-brand-full">Dan Hayes</span>
+                    Dan Hayes
                 {% endblock %}
             </a>
         </div>
@@ -75,19 +71,6 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="github-link">
-                    <div class="github-follow">
-                        <a class="github-button" href="https://github.com/imasnyper"
-                           aria-label="Follow @imasnyper on GitHub">Follow</a>
-                    </div>
-                </li>
-                <li class="twitter-link">
-                    <div class="twitter-follow">
-                        <a href="https://twitter.com/imasnyper" class="twitter-follow-button"
-                           data-show-screen-name="false" data-show-count="false">Follow @imasnyper</a>
-                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
-                </li>
                 <li class="{% block contact_active %}{% endblock %}">
                     <a href="{% url 'blog:contact' %}">Contact</a>
                 </li>
@@ -104,8 +87,7 @@
 {% block footer %}
     <footer class="footer">&copy;2019 Daniel Hayes</footer>
 {% endblock footer %}
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{% static 'blog/script.js' %}"></script>
 {% block extra_scripts %}{% endblock %}
 </body>
 </html>

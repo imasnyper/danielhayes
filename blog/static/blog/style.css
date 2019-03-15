@@ -76,10 +76,6 @@ form > button {
 /*}*/
 /*}*/
 
-.navbar-brand-full {
-    display: none;
-}
-
 .home-container {
     padding: 0 7%;
     margin: 0;
@@ -91,11 +87,6 @@ form > button {
     font-family: 'Share Tech Mono', monospace;
     flex: 1 0 auto; /* for sticky footer */
     margin: 0;
-}
-
-.blurb {
-    text-align: justify;
-    text-justify: inter-word;
 }
 
 .row {
@@ -121,4 +112,29 @@ label {
 
 .grecaptcha-badge {
     bottom: 74px !important;
+}
+
+.social-links {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    margin: 10px 30px 0 0;
+    width: 56px;
+    height: 24px;
+}
+
+.twitter-link, .github-link {
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    display: inline-block;
+}
+
+.twitter-link {
+    background-image: url("images/twitter logo.png");
+
+}
+
+.github-link {
+    background-image: url("images/github logo.png");
 }

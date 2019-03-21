@@ -2,6 +2,7 @@ import datetime
 
 import pytz
 from dateutil.relativedelta import relativedelta
+from django.contrib import messages
 from django.core import mail
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
@@ -230,16 +231,21 @@ def contact(request):
             content = template.render(context)
 
             with mail.get_connection() as connection:
-                mail.EmailMessage(
+                email_message = mail.EmailMessage(
                     f"Contact Form Submission: {subject}",
                     content,
-                    'Contact Form <contact@mg.dhayes.me>',
-                    ['daniel@dhayes.me', ],
+                    'Contact Form <contact@danhayes.dev>',
+                    ['dan@danhayes.dev', ],
                     reply_to=[contact_email, ],
                     connection=connection
-                ).send()
+                )
 
-            return redirect('home:home')
+                num_sent = email_message.send()
+
+                if num_sent != 0:
+                    messages.success(request, "Message successfully sent.")
+
+            return redirect('blog:home')
 
     context = {'form': form_class}
     return render(request, 'blog/contact.html', context)

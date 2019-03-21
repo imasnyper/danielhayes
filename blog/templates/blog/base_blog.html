@@ -19,6 +19,8 @@
     <div class="blog-container">
         <div class="row">
             <div class="col-sm-8 text-center post-container">
+                {% block messages %}
+                {% endblock messages %}
                 {% block post_detail %}
                 {% endblock post_detail %}
                 {% block post_list %}

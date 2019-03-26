@@ -232,9 +232,9 @@ def contact(request):
 
             with mail.get_connection() as connection:
                 email_message = mail.EmailMessage(
-                    f"Contact Form Submission: {subject}",
+                    f"{subject}",
                     content,
-                    'Contact Form <contact@danhayes.dev>',
+                    contact_name.strip().title() + ' <contact@danhayes.dev>',
                     ['dan@danhayes.dev', ],
                     reply_to=[contact_email, ],
                     connection=connection

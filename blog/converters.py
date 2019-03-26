@@ -1,18 +1,22 @@
 class FourDigitYearConverter:
     regex = '\d{4}'
 
-    def to_python(self, value):
+    @staticmethod
+    def to_python(value):
         return int(value)
 
-    def to_url(self, value):
+    @staticmethod
+    def to_url(value):
         return '%04d' % int(value)
 
 
 class TwoDigitMonthConverter:
     regex = '\d{2}'
 
-    def to_python(self, value):
+    @staticmethod
+    def to_python(value):
         return int(value)
 
-    def to_url(self, value):
+    @staticmethod
+    def to_url(value):
         return '%02d' % int(value)

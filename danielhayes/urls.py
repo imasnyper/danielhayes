@@ -46,8 +46,8 @@ sitemaps = {
 }
 
 urlpatterns = [
-    # path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
+    path('work/', include('work.urls'), name='work'),
     path('', include('blog.urls'), name='index'),
     path('tinymce/', include('tinymce.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},

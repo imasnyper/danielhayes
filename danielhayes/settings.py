@@ -30,9 +30,7 @@ with open(os.path.join(BASE_DIR, 'danielhayes/db_pass.txt')) as f:
 with open(os.path.join(BASE_DIR, 'danielhayes/disqus_key.txt')) as f:
     DISQUS_API_KEY = f.read().strip()
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'danhayes.dev', 'www.danhayes.dev']
-if not DEBUG:
-    ALLOWED_HOSTS = ['www.danhayes.dev', 'danhayes.dev', '149.248.57.118']
+ALLOWED_HOSTS = ['www.danhayes.dev', 'danhayes.dev', '149.248.57.118']
 
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1', ]
@@ -41,6 +39,7 @@ if DEBUG:
 
 INSTALLED_APPS = [
     'blog',
+    'work',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
